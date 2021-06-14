@@ -1,0 +1,30 @@
+version: "3"
+
+volumes:
+    mysql_vol:
+  
+services: 
+    app:
+        container_name: app
+        build: 
+            context: ./app
+            dockerfile: Dockerfile
+        tty: true
+        volumes:
+            - ./app:/go/src
+        ports: 
+            - "80:8080"
+        depends_on: 
+            - db
+
+    db:
+        container_name: db
+        build:
+            context: ./db
+            dockerfile: Dockerfile
+        volumes:
+        - mysql_vol:/var/lib/mysql:delegated
+        environment:
+        - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+        ports:
+        - "3306:3306"        
