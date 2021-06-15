@@ -12,6 +12,8 @@ on:
 jobs:
   build:
     runs-on: 'ubuntu-latest'
+    env:
+      image_name: junking
 
     steps:
     - uses: actions/checkout@v2
