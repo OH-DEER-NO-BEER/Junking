@@ -3,8 +3,12 @@ FROM golang:1.16.4-alpine3.13
 # アップデートとgitのインストール！！
 RUN apk update && apk add git
 
+ENV GO111MODULE=on
+
 ENV $APP_PATH = /app
 WORKDIR $APP_PATH
+
+RUN go mod download
 
 EXPOSE 8080
 
