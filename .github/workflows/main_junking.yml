@@ -21,10 +21,10 @@ jobs:
     #  run: |
     #    docker-compose up -d build
 
-    - name: Set up go latest
+    - name: Set up go 1.16.4
       uses: actions/setup-go@v1
       with:
-        go-version: '1.16.4-alpine3.13'
+        go-version: 1.16.4
         
     - name: Get dependencies
       run:  go get -v -t -d ./...
