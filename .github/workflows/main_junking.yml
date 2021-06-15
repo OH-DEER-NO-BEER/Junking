@@ -33,6 +33,7 @@ jobs:
       
     - name: go build and test
       run: |
+        cd app
         go test -v .
         go run server.go
 
