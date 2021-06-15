@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+
+	"github.com/gin-gonic/gin"
 )
 
 func helloWorld(w http.ResponseWriter, r *http.Request) {
@@ -16,9 +18,17 @@ func helloWorld(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	http.HandleFunc("/", helloWorld)
-	err := http.ListenAndServe(":8080", nil)
+	engine := gin.Default()
+	// engine.Static("/", "./views")
+
+	// engine.StaticFS("/", http.Dir("./views/static"))
+
+	engine.LoadHTMLGlob("views/*")
+	engine.GET("/", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "index.html", gin.H{})
+	})
+	err := engine.Run(":8080")
 	if err != nil {
-		log.Fatal("ListenAndServe: ", err)
+		log.Fatal("Run: ", err)
 	}
 }

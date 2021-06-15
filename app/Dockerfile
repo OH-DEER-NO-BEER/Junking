@@ -6,5 +6,8 @@ RUN apk update && apk add git
 WORKDIR /go/src
 
 # RUN go run /go/src/server.go
+# RUN go mod init main
+# RUN go mod tidy
 
 CMD ["go", "run", "server.go"]
+# CMD ["./app"]
