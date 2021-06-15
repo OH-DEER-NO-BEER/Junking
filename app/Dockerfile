@@ -4,7 +4,7 @@ FROM golang:1.16.4-alpine3.13
 RUN apk update && apk add git
 
 WORKDIR /go/src
-EXPOSE 80
+EXPOSE 8080
 
 # RUN go run /go/src/server.go
 # RUN go mod init main
