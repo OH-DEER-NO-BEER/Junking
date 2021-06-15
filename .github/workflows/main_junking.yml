@@ -41,8 +41,7 @@ jobs:
         push: true
         tags: |
           ${{ steps.prepare_image_id.outputs.lowercase_id }}:latest
-          ${{ steps.prepare_image_id.outputs.lowercase_id }}:${{ steps.prepare_image_id.outputs.short-ref }}
-        file: ./Dockerfile
+        file: ./app/Dockerfile
 
   deploy:
     runs-on: ubuntu-latest
