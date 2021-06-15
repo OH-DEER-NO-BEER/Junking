@@ -27,15 +27,12 @@ jobs:
         go-version: 1.16.4
         
     - name: Get dependencies
-      run: |
-        cd app
-        go get -v -t -d ./...
+      run:  go get -v -t -d ./...
       
     - name: go build and test
       run: |
-        cd app
         go test -v .
-        go run server.go
+    #    go run ./app/server.go
 
     #- name: npm install, build, and test
     #  run: |
