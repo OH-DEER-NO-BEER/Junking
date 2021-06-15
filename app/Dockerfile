@@ -3,7 +3,9 @@ FROM golang:1.16.4-alpine3.13
 # アップデートとgitのインストール！！
 RUN apk update && apk add git
 
-WORKDIR /go/src
+ENV $APP_PATH = /app
+WORKDIR $APP_PATH
+
 EXPOSE 8080
 
 # RUN go run /go/src/server.go
