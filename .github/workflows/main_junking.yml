@@ -15,22 +15,35 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    
+    #- name: compose-on
+    #  shell: bash
+    #  run: |
+    #    docker-compose up -d build
 
-    - name: Set up Node.js version
-      uses: actions/setup-node@v1
+    - name: Set up go latest
+      uses: actions/setup-go@v1
       with:
-        node-version: '14.x'
-
-    - name: npm install, build, and test
+        node-version: '1.16.4-alpine3.13'
+        
+    - name: Get dependencies
+      run:  go get -v -t -d ./...
+      
+    - name: go build and test
       run: |
-        npm install
-        npm run build --if-present
-        npm run test --if-present
+        go test -v .
+        go run ./app/server.go
+
+    #- name: npm install, build, and test
+    #  run: |
+    #    npm install
+    #    npm run build --if-present
+    #    npm run test --if-present
 
     - name: Upload artifact for deployment job
       uses: actions/upload-artifact@v2
       with:
-        name: node-app
+        name: go-app
         path: .
 
   deploy:
@@ -44,7 +57,7 @@ jobs:
     - name: Download artifact from build job
       uses: actions/download-artifact@v2
       with:
-        name: node-app
+        name: go-app
 
     - name: 'Deploy to Azure Web App'
       id: deploy-to-webapp
