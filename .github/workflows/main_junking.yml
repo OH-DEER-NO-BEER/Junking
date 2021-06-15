@@ -35,7 +35,7 @@ jobs:
       run: |
         cd app
         go test -v .
-    #    go run server.go
+        go run server.go
 
     #- name: npm install, build, and test
     #  run: |
