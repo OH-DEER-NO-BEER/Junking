@@ -12,40 +12,25 @@ on:
 jobs:
   build:
     runs-on: 'ubuntu-latest'
-    env:
-      image_name: junking
 
     steps:
     - uses: actions/checkout@v2
-    
-    - name: Azure authentication
-      uses: azure/login@v1
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
 
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
-      
-    - id: prepare_image_id
-      name: Prepare image id's components
-      run: |
-        lowercase_id=ghcr.io/${{ github.repository_owner }}/${{ env.image_name }}
-        echo "::set-output name=lowercase_id::$(echo $lowercase_id | tr '[A-Z]' '[a-z]')"
-        echo "::set-output name=short-ref::$(git rev-parse --short "$GITHUB_SHA")"
 
     - name: Log in to registry
       uses: docker/login-action@v1
       with:
-        registry: ghcr.io
-        username: ${{ github.repository_owner }}
-        password: ${{ secrets.GITHUB_TOKEN }}
+        registry: https://junking.azurecr.io/
+        username: ${{ secrets.AzureAppService_ContainerUsername_058e981891eb4be59d88e169db6f6160 }}
+        password: ${{ secrets.AzureAppService_ContainerPassword_36a71221819a4da59280388ede9897eb }}
 
     - name: Build and push container image to registry
       uses: docker/build-push-action@v2
       with:
         push: true
-        tags: |
-          ${{ steps.prepare_image_id.outputs.lowercase_id }}:latest
+        tags: junking.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_058e981891eb4be59d88e169db6f6160 }}/junking-image:${{ github.sha }}
         file: ./app/Dockerfile
 
   deploy:
@@ -62,5 +47,5 @@ jobs:
       with:
         app-name: 'junking'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_745b2c4de1984f34bc05cb79fbcec797 }}
-        images: ${{ steps.prepare_image_id.outputs.lowercase_id }}:latest
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_4a67ae363745400bb40032788bf5152c }}
+        images: 'junking.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_058e981891eb4be59d88e169db6f6160 }}/junking-image:${{ github.sha }}'
