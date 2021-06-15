@@ -10,6 +10,10 @@ WORKDIR $APP_PATH
 
 RUN go mod download
 
+ARG CGO_ENABLED=0
+ARG GOOS=linux
+ARG GOARCH=amd64
+
 EXPOSE 8080
 
 # RUN go run /go/src/server.go
