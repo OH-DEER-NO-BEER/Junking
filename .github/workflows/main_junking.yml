@@ -37,7 +37,9 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         push: true
-        tags: ${{ steps.prepare_image_id.outputs.lowercase_id }}:latest
+        tags: |
+          ${{ steps.prepare_image_id.outputs.lowercase_id }}:latest
+          ${{ steps.prepare_image_id.outputs.lowercase_id }}:${{ steps.prepare_image_id.outputs.short-ref }}
         file: ./Dockerfile
 
   deploy:
