@@ -8,6 +8,7 @@ ENV GO111MODULE=on
 ENV $APP_PATH = /app
 WORKDIR $APP_PATH
 
+COPY go.mod go.sum ./
 RUN go mod download
 
 ARG CGO_ENABLED=0
