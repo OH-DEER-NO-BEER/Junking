@@ -26,12 +26,17 @@ jobs:
         username: ${{ secrets.AzureAppService_ContainerUsername_4c9d443ad7f046898a2d9cc4478c20f7 }}
         password: ${{ secrets.AzureAppService_ContainerPassword_bf55aab5bdfa485f8310a7b38b5b0ba7 }}
 
-    - name: Build and push container image to registry
-      uses: docker/build-push-action@v2
-      with:
-        push: true
-        tags: junking.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_4c9d443ad7f046898a2d9cc4478c20f7 }}/junking-image:${{ github.sha }}
-        file: ./app/Dockerfile
+    - run: |
+        cd ./app
+        docker build . -t junking.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_4c9d443ad7f046898a2d9cc4478c20f7 }}/junking-image:${{ github.sha }}
+        docker push junking.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_4c9d443ad7f046898a2d9cc4478c20f7 }}/junking-image:${{ github.sha }} 
+
+    #- name: Build and push container image to registry
+    #  uses: docker/build-push-action@v2
+    #  with:
+    #    push: true
+    #    tags: junking.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_4c9d443ad7f046898a2d9cc4478c20f7 }}/junking-image:${{ github.sha }}
+    #    file: ./app/Dockerfile
 
   deploy:
     runs-on: ubuntu-latest
