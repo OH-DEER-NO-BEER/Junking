@@ -11,7 +11,7 @@ services:
             dockerfile: Dockerfile
         tty: true
         volumes:
-            - ./app:/go/src
+            - ./app:/go/src/Junking
         ports: 
             - "80:8080"
         depends_on: 
