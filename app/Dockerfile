@@ -5,8 +5,7 @@ RUN apk update && apk add git
 
 ENV GO111MODULE=on
 
-ENV $APP_PATH = /app
-WORKDIR $APP_PATH
+WORKDIR /app
 
 #COPY go.mod go.sum ./
 #RUN go mod download
