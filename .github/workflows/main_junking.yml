@@ -27,7 +27,7 @@ jobs:
         password: ${{ secrets.AzureAppService_ContainerPassword_bf55aab5bdfa485f8310a7b38b5b0ba7 }}
 
     - run: |
-        cd ./app
+        cd app
         docker build . -t junking.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_4c9d443ad7f046898a2d9cc4478c20f7 }}/junking-image:${{ github.sha }}
         docker push junking.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_4c9d443ad7f046898a2d9cc4478c20f7 }}/junking-image:${{ github.sha }} 
 
