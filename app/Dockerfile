@@ -5,6 +5,7 @@ RUN apk update && apk add git
 
 ENV GO111MODULE=on
 
+RUN pwd
 #COPY go.mod go.sum ./
 #RUN go mod download
 ARG CGO_ENABLED=0
