@@ -6,12 +6,14 @@ volumes:
 services: 
     app:
         container_name: app
+        environment:
+            - "GOPATH=/go"
         build: 
             context: ./app
             dockerfile: Dockerfile
         tty: true
         volumes:
-            - ./app:/go/src
+            - ./app:/go/src/app
         ports: 
             - "80:8080"
         depends_on: 
