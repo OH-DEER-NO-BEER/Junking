@@ -1,8 +1,8 @@
 <template>
 <div class="small">
     <h1>Body.vue</h1>
-    <bar-chart :chart-data="datacollection"></bar-chart>
-    <radar-chart :chart-data="datacollection"></radar-chart>
+    <bar-chart></bar-chart>
+    <radar-chart></radar-chart>
 </div>
 </template>
 
