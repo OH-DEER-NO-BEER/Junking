@@ -1,7 +1,8 @@
 <template>
 <div class="small">
     <h1>Body.vue</h1>
-    <line-chart :chart-data="datacollection"></line-chart>
+    <bar-chart :chart-data="datacollection"></bar-chart>
+    <radar-chart :chart-data="datacollection"></radar-chart>
 </div>
 </template>
 
@@ -19,7 +20,7 @@ export default {
 
 <style>
   .small {
-    max-width: 600px;
+    max-width: 50%;
     margin:  150px auto;
   }
 </style>
