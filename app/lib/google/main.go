@@ -1,6 +1,8 @@
 package google
 
 import (
+	"os"
+
 	"golang.org/x/oauth2"
 )
 
@@ -11,8 +13,8 @@ const (
 
 func GetConnection() *oauth2.Config {
 	config := &oauth2.Config{
-		ClientID:     "",
-		ClientSecret: "",
+		ClientID:     os.Getenv("GoogleClientID"),
+		ClientSecret: os.Getenv("GoogleClientSecret"),
 		Endpoint: oauth2.Endpoint{
 			AuthURL:  authorizeEndpoint,
 			TokenURL: tokenEndpoint,
