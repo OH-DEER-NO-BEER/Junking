@@ -37,9 +37,9 @@ jobs:
         password: ${{ secrets.AzureAppService_ContainerPassword_bf55aab5bdfa485f8310a7b38b5b0ba7 }}
 
     - name: Build and push docker-compose
-      env: |
-        GoogleClientID=${{ secrets.GoogleClientID }}
-        GoogleClientSecret=${{ secrets.GoogleClientSecret }}
+      env: 
+        GoogleClientID: ${{ secrets.GoogleClientID }}
+        GoogleClientSecret: ${{ secrets.GoogleClientSecret }}
       run: |
         docker-compose build . -t junking.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_4c9d443ad7f046898a2d9cc4478c20f7 }}/junking-image:${{ github.sha }}
         docker-compose push junking.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_4c9d443ad7f046898a2d9cc4478c20f7 }}/junking-image:${{ github.sha }} 
