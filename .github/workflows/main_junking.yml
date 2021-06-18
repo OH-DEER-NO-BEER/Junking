@@ -41,7 +41,7 @@ jobs:
         GoogleClientID: ${{ secrets.GoogleClientID }}
         GoogleClientSecret: ${{ secrets.GoogleClientSecret }}
       run: |
-        docker-compose build -t junking.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_4c9d443ad7f046898a2d9cc4478c20f7 }}/junking-image:${{ github.sha }}
+        docker-compose --file docker-compose.test.yml build -t --tag junking.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_4c9d443ad7f046898a2d9cc4478c20f7 }}/junking-image:${{ github.sha }}
         docker-compose push junking.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_4c9d443ad7f046898a2d9cc4478c20f7 }}/junking-image:${{ github.sha }} 
 
     #- name: Build and push
