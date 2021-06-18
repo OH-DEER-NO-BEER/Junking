@@ -14,7 +14,7 @@ ARG GoogleClientSecret
 ENV GoogleClientID=${GoogleClientID}
 ENV GoogleClientSecret=${GoogleClientSecret}
 
-RUN go mod download
+# RUN go mod download
 
 EXPOSE 8080
 
