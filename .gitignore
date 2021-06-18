@@ -2,7 +2,7 @@
 .env
 
 # npm libraries
-app/node_modules/
+app/views/node_modules/
 
 # Binaries for programs and plugins
 *.exe

@@ -1,25 +1,10 @@
+<!DOCTYPE html>
 <html>
 	<head>
-		<title>Hello, Vue.js!</title>
-		<!-- Specified version will be used for avoiding conflicting -->
-		<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>	
+		<meta charset="utf-8" />
+		<script defer src="./dist/main.js"></script>
 	</head>
-	
 	<body>
-		<div id="app">
-			<p>&{message}</p>
-		</div>
-		<script>
-			// check whether Vue is set as global variable or not
-			console.assert(typeof Vue != "undefined");
-			new Vue({
-				el: "#app",
-				data: {
-					message:
-						"Junking provides a reliable and fair rock-paper-scissors game.",
-				},
-				delimiters: ['&{', '}'],
-			});
-		</script>	
-	</body>	
+		<div id="app"></div>
+	</body>
 </html>
