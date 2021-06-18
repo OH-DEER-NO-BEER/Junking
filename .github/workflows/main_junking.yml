@@ -37,7 +37,7 @@ jobs:
         password: ${{ secrets.AzureAppService_ContainerPassword_bf55aab5bdfa485f8310a7b38b5b0ba7 }}
 
     - name: Build and push docker-compose
-      env:
+      env: |
         GoogleClientID=${{ secrets.GoogleClientID }}
         GoogleClientSecret=${{ secrets.GoogleClientSecret }}
       run: |
