@@ -35,8 +35,8 @@ func GetToken(c *gin.Context) {
 	// 	"Email": tokenInfo.Email,
 	// })
 
-	c.SetCookie("ID", tokenInfo.UserId, 3600, "/", "localhost", false, true)
-	c.SetCookie("Email", tokenInfo.Email, 3600, "/", "localhost", false, true)
+	c.SetCookie("ID", tokenInfo.UserId, 3600, "/", "localhost", false, true)   //change localhost -> ?
+	c.SetCookie("Email", tokenInfo.Email, 3600, "/", "localhost", false, true) //change localhost -> ?
 	fmt.Println("setted : ", tokenInfo.UserId, tokenInfo.Email)
 
 	c.Redirect(http.StatusTemporaryRedirect, "http://localhost")
