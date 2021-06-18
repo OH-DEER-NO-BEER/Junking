@@ -15,6 +15,6 @@ EXPOSE 8080
 # RUN go mod init main
 # RUN go mod tidy
 
-# CMD ["go", "run", "server.go"]
+CMD ["go", "run", "server.go"]
 
 # CMD ["./app"]
