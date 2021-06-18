@@ -48,6 +48,9 @@ jobs:
         context: ./
         file: ./app/Dockerfile
         builder: ${{ steps.buildx.outputs.name }}
+        build-args: |
+          GoogleClientID=${{ secrets.GoogleClientID }}
+          GoogleClientSecret=${{ secrets.GoogleClientSecret }}
         push: true
         tags: junking.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_4c9d443ad7f046898a2d9cc4478c20f7 }}/junking-image:${{ github.sha }}
         cache-from: type=local,src=/tmp/.buildx-cache
