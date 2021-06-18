@@ -37,7 +37,8 @@ func sampleMiddleware() gin.HandlerFunc {
 func main() {
 	engine := gin.Default()
 
-	engine.LoadHTMLGlob("views/*")
+	engine.LoadHTMLGlob("views/*.html")
+	engine.Static("/js", "./views/dist")
 
 	engine.GET("/google/callback", controllers.GetToken)
 

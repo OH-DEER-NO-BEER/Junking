@@ -1,8 +1,10 @@
-FROM golang:1.16.4-alpine3.13
+FROM golang:latest
 
-RUN apk update && apk add git
-
+WORKDIR /go/src/Junking/views 
+RUN apt-get update && apt-get install -y git && apt-get install -y nodejs npm && npm install
+# RUN apk update && apk add git && apk add nodejs && apk add --update npm && npm install && npm run build
 WORKDIR /go/src/Junking
+
 ENV GO111MODULE=on
 ARG CGO_ENABLED=0
 ARG GOOS=linux
