@@ -1,28 +1,20 @@
-FROM golang:1.16.4-alpine3.13
+FROM golang:latest
 
-# アップデートとgitのインストール！！
-RUN apk update && apk add git
+WORKDIR /go/src/Junking/views 
+RUN apt-get update && apt-get install -y git && apt-get install -y nodejs npm && npm install
+# RUN apk update && apk add git && apk add nodejs && apk add --update npm && npm install && npm run build
+WORKDIR /go/src/Junking
 
 ENV GO111MODULE=on
-
-# appディレクトリの作成
-RUN mkdir /go/src/app
-# ワーキングディレクトリの設定
-WORKDIR /go/src/app
-# ホストのファイルをコンテナの作業ディレクトリに移行
-ADD . /go/src/app
-
-#COPY go.mod go.sum ./
-#RUN go mod download
 ARG CGO_ENABLED=0
 ARG GOOS=linux
 ARG GOARCH=amd64
-
 EXPOSE 8080
 
 # RUN go run /go/src/server.go
 # RUN go mod init main
 # RUN go mod tidy
 
-CMD ["go", "run", "server.go"]
+# CMD ["go", "run", "server.go"]
+
 # CMD ["./app"]
