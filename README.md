@@ -2,11 +2,12 @@
 
 
 ## for developers
-### コンテナ
-- コンテナ起動 : docker-compose up -d --build
+### Docker-composeのコマンド
+- コンテナビルド : docker-compose build --build-arg GoogleClientID=別途共有のClientID --build-arg GoogleClientSecret=別途共有のClientSecret
+- コンテナ起動(サーバーまで自動で起動してくれるはず) : docker-compose up -d
 - コンテナ＆ボリューム削除 : docker-compose down -v
-### サーバー起動
+### コンテナ内コマンド
 - コンテナログイン : docker exec -it bash
-- サーバー立ち上げ : go run server.go (ただし /app/lib/google/main.go のClientID, ClientSecret は別途共有）
+- サーバ立ち上げ : go run server.go
 - サーバー終了 : Ctrl-c
 - コンテナログアウト : exit

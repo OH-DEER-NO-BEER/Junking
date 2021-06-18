@@ -9,6 +9,11 @@ ENV GO111MODULE=on
 ARG CGO_ENABLED=0
 ARG GOOS=linux
 ARG GOARCH=amd64
+ARG GoogleClientID
+ARG GoogleClientSecret
+ENV GoogleClientID=${GoogleClientID}
+ENV GoogleClientSecret=${GoogleClientSecret}
+
 EXPOSE 8080
 
 # RUN go run /go/src/server.go
@@ -16,5 +21,3 @@ EXPOSE 8080
 # RUN go mod tidy
 
 CMD ["go", "run", "server.go"]
-
-# CMD ["./app"]

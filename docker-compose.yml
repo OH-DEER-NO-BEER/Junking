@@ -11,6 +11,9 @@ services:
         build: 
             context: ./app
             dockerfile: Dockerfile
+            args:
+                - GoogleClientID=test
+                - GoogleClientSecret=test
         tty: true
         volumes:
             - ./app:/go/src/Junking
