@@ -6,6 +6,8 @@ volumes:
 services: 
     app:
         container_name: app
+        environment:
+            - "GOPATH=/go"
         build: 
             context: ./app
             dockerfile: Dockerfile
