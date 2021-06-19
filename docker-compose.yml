@@ -4,6 +4,19 @@ volumes:
     mysql_vol:
   
 services: 
+# HTTPS Reverse Proxy
+    https-portal:
+        image: steveltn/https-portal:1
+        ports:
+          - '80:80'
+          - '443:443'
+        links:
+            - app
+        restart: always
+        environment:
+            STAGE: 'production'
+            DOMAINS: 'junking.tk => www.junking.tk, www.junking.tk -> http://app:8080'
+      
     app:
         container_name: app
         environment:
@@ -18,7 +31,7 @@ services:
         volumes:
             - ./app:/go/src/Junking
         ports: 
-            - "80:8080"
+            - "8080:8080"
         depends_on: 
             - db
 
