@@ -68,6 +68,8 @@ func main() {
 		loginGroup.GET("/app", func(c *gin.Context) {
 			c.HTML(http.StatusOK, "index.html", gin.H{})
 		})
+
+		loginGroup.GET("/ws:roomId", controllers.CheckIn)
 	}
 
 	// engine.Static("/view", "./views")
