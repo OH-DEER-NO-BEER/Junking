@@ -61,10 +61,10 @@ func main() {
 			// c.HTML(http.StatusOK, "index.html", gin.H{
 			// 	"message": "Hi! here is root!",
 			// })
-			c.Redirect(http.StatusTemporaryRedirect, "http://localhost/test")
+			c.Redirect(http.StatusTemporaryRedirect, "/app")
 		})
 		// engine.GET("/", controllers.GetOauth2)
-		loginGroup.GET("/test", func(c *gin.Context) {
+		loginGroup.GET("/app", func(c *gin.Context) {
 			c.HTML(http.StatusOK, "index.html", gin.H{})
 		})
 	}
