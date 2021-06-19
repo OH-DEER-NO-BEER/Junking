@@ -8,5 +8,5 @@ else
   cd Junking
 fi
 
-docker-compose build --no-cache --build-arg GoogleClientID=$2 --build-arg GoogleClientSecret=$3
+docker-compose build --build-arg GoogleClientID=$2 --build-arg GoogleClientSecret=$3
 docker-compose up -d
