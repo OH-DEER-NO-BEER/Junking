@@ -4,8 +4,6 @@
 		<meta charset="utf-8" />
 		<!-- rendered files -->
 		<script defer src="js/main.js"></script>
-		<script src="unity/unityConnector.js"></script>
-		<script src="unity/unity.js"></script>
 		<!-- setting for Vuetify -->
 		<link
 			href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900"
@@ -15,19 +13,20 @@
 			href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css"
 			rel="stylesheet"
 		/>
-
+		<link rel="stylesheet" href="./css/index.css" />
 		<!-- setting for Unity -->
 		<meta charset="utf-8" />
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>Junking</title>
 		<link rel="shortcut icon" href="TemplateData/favicon.ico" />
 		<link rel="stylesheet" href="TemplateData/style.css" />
+		<div id="app"></div>
 	</head>
 	<body>
-		<div id="unity" style="margin: 0 auto;">
+		<div id="unity">
 			<button>
 				<div id="unity-container" class="unity-desktop">
-					<canvas id="unity-canvas" width="960" height="600"></canvas>
+					<canvas id="unity-canvas" width="70%" height="80%"></canvas>
 					<div id="unity-loading-bar">
 						<div id="unity-logo"></div>
 						<div id="unity-progress-bar-empty">
@@ -45,7 +44,8 @@
 					// fdsafsdafsda
 				</script>
 			</button>
+			<script src="unity/unity.js"></script>
+			<script src="unity/unityConnector.js"></script>
 		</div>
-		<div id="app" style="margin: 0 auto;"></div>
 	</body>
 </html>

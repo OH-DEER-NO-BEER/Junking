@@ -1,7 +1,7 @@
 <template>
-  <div class="background">
+  <div>
   <Header></Header>
-    <Body></Body>
+  <Body></Body>
   </div>
 </template>
 
