@@ -2,16 +2,27 @@
 <html>
 	<head>
 		<meta charset="utf-8" />
+		<!-- rendered files -->
 		<script defer src="js/main.js"></script>
+		<!-- setting for Vuetify -->
+		<link
+			href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900"
+			rel="stylesheet"
+		/>
+		<link
+			href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css"
+			rel="stylesheet"
+		/>
+
+		<!-- setting for Unity -->
 		<meta charset="utf-8" />
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>Unity WebGL Player | JunkProject</title>
+		<title>Junking</title>
 		<link rel="shortcut icon" href="TemplateData/favicon.ico" />
 		<link rel="stylesheet" href="TemplateData/style.css" />
 	</head>
 	<body>
 		<div id="unity" style="margin: 0 auto;">
-			<input type="button" value="button" onclick="buttonClick()" />
 			<button>
 				<div id="unity-container" class="unity-desktop">
 					<canvas id="unity-canvas" width="960" height="600"></canvas>
@@ -145,7 +156,6 @@
 				</script>
 			</button>
 		</div>
-
-		<div id="app"></div>
+		<div id="app" style="margin: 0 auto;"></div>
 	</body>
 </html>
