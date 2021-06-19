@@ -40,6 +40,7 @@ func main() {
 	engine.LoadHTMLGlob("views/*.html")
 	engine.Static("/js", "./views/dist")
 	engine.Static("/Build", "./views/Build")
+	engine.Static("/TemplateData", "./views/TemplateData")
 
 	engine.GET("/google/callback", controllers.GetToken)
 
