@@ -1,11 +1,11 @@
 #!/bin/bash
 
 # 初回のみClone、以降はPullする
-if cd /go/src/Junking; then
+if cd Junking; then
   git pull;
 else
-  git clone $1 /go/src/Junking;
-  cd /go/src/Junking
+  git clone $1 Junking;
+  cd Junking
 fi
 
 # 実験時のGCEでdocekr-composeコマンドが使えなかったため、それ用のdocker imageを使用した
