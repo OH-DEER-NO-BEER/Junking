@@ -12,7 +12,7 @@ ARG GOOS=linux
 ARG GOARCH=amd64
 ARG GoogleClientID
 ARG GoogleClientSecret
-ARG HostName=34.97.10.235
+ARG HostName=junking.tk
 ENV GoogleClientID=${GoogleClientID}
 ENV GoogleClientSecret=${GoogleClientSecret}
 
