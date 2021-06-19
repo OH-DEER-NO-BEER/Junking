@@ -32,6 +32,7 @@ func main() {
 	engine.Static("/js", "./views/dist")
 	engine.Static("/unity", "./views/unity")
 	engine.Static("/Build", "./views/Build")
+	engine.Static("/css", "./views/css")
 	engine.Static("/TemplateData", "./views/TemplateData")
 
 	engine.GET("/google/callback", controllers.GetToken)
