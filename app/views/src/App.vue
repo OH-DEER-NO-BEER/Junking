@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <Header></Header>
+  <div class="background">
+  <Header></Header>
     <Body></Body>
   </div>
 </template>
@@ -18,5 +18,4 @@ export default {
 </script>
 
 <style>
-
 </style>
