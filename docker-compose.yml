@@ -12,7 +12,6 @@ services:
           - '443:443'
         links:
             - app
-        restart: always
         environment:
             STAGE: 'production'
             DOMAINS: 'junking.tk => www.junking.tk, www.junking.tk -> http://app:8080'
