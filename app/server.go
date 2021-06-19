@@ -21,10 +21,11 @@ import (
 
 func sampleMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
+		name, name_err := c.Cookie("Name")
 		id, id_err := c.Cookie("ID")
 		email, email_err := c.Cookie(("Email"))
-		fmt.Println("id =", id, ", email =", email, ", id_err =", id_err, ", emai_err =", email_err)
-		if id_err != nil || email_err != nil {
+		fmt.Println("name =", name, "id =", id, ", email =", email, "name_err =", name_err, "id_err =", id_err, ", emai_err =", email_err)
+		if name_err != nil || id_err != nil || email_err != nil {
 			// c.Redirect()
 			fmt.Println("No Cookie!")
 			controllers.GetOauth2(c)
@@ -40,6 +41,7 @@ func main() {
 	engine.LoadHTMLGlob("views/*.html")
 	engine.Static("/js", "./views/dist")
 	engine.Static("/Build", "./views/Build")
+	engine.Static("/TemplateData", "./views/TemplateData")
 
 	engine.GET("/google/callback", controllers.GetToken)
 
@@ -60,13 +62,16 @@ func main() {
 			// c.HTML(http.StatusOK, "index.html", gin.H{
 			// 	"message": "Hi! here is root!",
 			// })
-			c.Redirect(http.StatusTemporaryRedirect, "http://localhost/test")
+			c.Redirect(http.StatusTemporaryRedirect, "/app")
 		})
 		// engine.GET("/", controllers.GetOauth2)
-		loginGroup.GET("/test", func(c *gin.Context) {
+		loginGroup.GET("/app", func(c *gin.Context) {
 			c.HTML(http.StatusOK, "index.html", gin.H{})
 		})
+
+		loginGroup.GET("/ws:roomId", controllers.CheckIn)
 	}
+
 	// engine.Static("/view", "./views")
 
 	// store := cookie.NewStore([]byte("secret"))
