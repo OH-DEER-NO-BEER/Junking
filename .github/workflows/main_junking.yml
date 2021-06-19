@@ -26,9 +26,10 @@ jobs:
           SSH_KEY: ${{ secrets.SSHKEY }}
           SSH_KEY_PUB: ${{ secrets.SSHKEYPUB }}
           SERVER_HOST: ${{ secrets.APP_IP }} # 接続先のGCEの外部IP
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
       - name: Deploy
         run: |
-          ssh yokoro@${SERVER_HOST} -i ~/.ssh/my-ssh-key 'bash -s' < deploy.sh ${GIT_REPOSITORY}
+          ssh ${DEPLOY_USER}@${SERVER_HOST} -i ~/.ssh/my-ssh-key 'bash -s' < deploy.sh ${GIT_REPOSITORY}
         env:
           SERVER_HOST: ${{ secrets.APP_IP }} # 接続先のGCEの外部IP
           GIT_REPOSITORY: https://github.com/OH-DEER-NO-BEER/Junking
