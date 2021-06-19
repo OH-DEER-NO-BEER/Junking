@@ -28,6 +28,7 @@ func GetToken(c *gin.Context) {
 	}
 
 	service, _ := v2.New(config.Client(c, tok))
+	userinfo, _ := service.Userinfo.Get().Fields().Context(c).Do()
 	tokenInfo, _ := service.Tokeninfo().AccessToken(tok.AccessToken).Context(c).Do()
 
 	// c.JSON(http.StatusOK, gin.H{
@@ -35,6 +36,7 @@ func GetToken(c *gin.Context) {
 	// 	"Email": tokenInfo.Email,
 	// })
 
+	c.SetCookie("Name", userinfo.Name, 3600, "/", "localhost", false, true)    //change localhost -> ?
 	c.SetCookie("ID", tokenInfo.UserId, 3600, "/", "localhost", false, true)   //change localhost -> ?
 	c.SetCookie("Email", tokenInfo.Email, 3600, "/", "localhost", false, true) //change localhost -> ?
 	fmt.Println("setted : ", tokenInfo.UserId, tokenInfo.Email)
