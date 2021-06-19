@@ -1,6 +1,17 @@
 <template>
-  <div>
-    <h1>Header.vue</h1>
+  <div>	
+  <v-app>
+    <header>
+      <v-app-bar
+        app
+        dark
+      >
+        <v-toolbar-title>MyPortfolioSite</v-toolbar-title>
+      </v-app-bar>
+    </header>
+  </v-app>
+  </div>
+</template>
   </div>
 </template>
 
