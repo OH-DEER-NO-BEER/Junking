@@ -12,9 +12,10 @@ ARG GOOS=linux
 ARG GOARCH=amd64
 ARG GoogleClientID
 ARG GoogleClientSecret
-ARG HostName=junking.tk
+ARG HostName=localhost
 ENV GoogleClientID=${GoogleClientID}
 ENV GoogleClientSecret=${GoogleClientSecret}
+ENV HostName=${HostName}
 
 EXPOSE 8080
 
