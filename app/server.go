@@ -40,6 +40,7 @@ func main() {
 
 	engine.LoadHTMLGlob("views/*.html")
 	engine.Static("/js", "./views/dist")
+	engine.Static("/unity", "./views/unity")
 	engine.Static("/Build", "./views/Build")
 	engine.Static("/TemplateData", "./views/TemplateData")
 
