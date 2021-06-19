@@ -1,12 +1,46 @@
+// mockMessage (VISIBLE!)
+var mockMessageScene2 = {
+	message: "from JavaScript!",
+	myself: {
+		name: "wakishi",
+		rate: {
+			rock: 0.1,
+			scissors: 0.1,
+			paper: 0.8,
+		},
+	},
+	opponent: {
+		name: "yokoro",
+		rate: {
+			rock: 0.3,
+			scissors: 0.3,
+			paper: 0.4,
+		},
+	},
+};
+var mockMessageScene3 = {
+	message: "from JavaScript!",
+	myself: {
+		name: "wakishi",
+		rate: {
+			rock: 0.1,
+			scissors: 0.1,
+			paper: 0.8,
+		},
+	},
+	opponent: {
+		name: "yokoro",
+		rate: {
+			rock: 0.3,
+			scissors: 0.3,
+			paper: 0.4,
+		},
+	},
+};
 // setting for data
 let roomID = null;
-let data = {
-	roomID: null,
-};
 // methods related to storage
-function sendJson() {
-	console.log("	");
-}
+function sentToUnity() {}
 function getRoomID() {
 	return localStorage.getItem("roomID");
 }
@@ -19,7 +53,12 @@ function watchStorage() {
 		console.log("now: " + roomID);
 		if (roomID != null) {
 			// if roomID is written by Unity, go out of block
-			console.log("Caught!!!!!!!!!!!!!");
+			// SEND
+			uniIns.SendMessage(
+				"EventControl",
+				"SetJson",
+				JSON.stringify(mockMessageScene2)
+			);
 			clearInterval(intervalID);
 		}
 	}, 1000);
