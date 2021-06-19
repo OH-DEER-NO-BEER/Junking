@@ -28,8 +28,10 @@ jobs:
           SERVER_HOST: ${{ secrets.APP_IP }} # 接続先のGCEの外部IP
       - name: Deploy
         run: |
-          ssh ${DEPLOY_USER}@${SERVER_HOST} -i ~/.ssh/my-ssh-key 'bash -s' < deploy.sh ${GIT_REPOSITORY}
+          ssh ${DEPLOY_USER}@${SERVER_HOST} -i ~/.ssh/my-ssh-key 'bash -s' < deploy.sh ${GIT_REPOSITORY} ${GOOGLECLIENTID} ${GOOGLECLIENTSECRET} 
         env:
           DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
           SERVER_HOST: ${{ secrets.APP_IP }} # 接続先のGCEの外部IP
           GIT_REPOSITORY: https://github.com/OH-DEER-NO-BEER/Junking
+          GOOGLECLIENTID: ${{ secrets.GOOGLECLIENTID }}
+          GOOGLECLIENTSECRET: ${{ secrets.GOOGLECLIENTSECRET }}
