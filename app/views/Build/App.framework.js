@@ -1379,7 +1379,7 @@ function unityFramework(Module) {
 		return ASM_CONSTS[code](a0);
 	}
 	STATIC_BASE = GLOBAL_BASE;
-	STATICTOP = STATIC_BASE + 2441680;
+	STATICTOP = STATIC_BASE + 2449776;
 	__ATINIT__.push(
 		{
 			func: function() {
@@ -2527,22 +2527,26 @@ function unityFramework(Module) {
 			},
 		}
 	);
-	var STATIC_BUMP = 2441680;
+	var STATIC_BUMP = 2449776;
 	Module["STATIC_BASE"] = STATIC_BASE;
 	Module["STATIC_BUMP"] = STATIC_BUMP;
 	var tempDoublePtr = STATICTOP;
 	STATICTOP += 16;
-	function _AddNumbers(x, y) {
-		return x + y;
+	function _AddNumbers() {
+		err("missing function: AddNumbers");
+		abort(-1);
 	}
-	function _BindWebGLTexture(texture) {
-		GLctx.bindTexture(GLctx.TEXTURE_2D, GL.textures[texture]);
+	function _BindWebGLTexture() {
+		err("missing function: BindWebGLTexture");
+		abort(-1);
 	}
 	function _Hello() {
-		window.alert("Hello, world!");
+		err("missing function: Hello");
+		abort(-1);
 	}
-	function _HelloString(str) {
-		window.alert(Pointer_stringify(str));
+	function _HelloString() {
+		err("missing function: HelloString");
+		abort(-1);
 	}
 	function _JS_Cursor_SetImage(ptr, length) {
 		var binary = "";
@@ -3078,15 +3082,19 @@ function unityFramework(Module) {
 	function _JS_SystemInfo_HasWebGL() {
 		return Module.SystemInfo.hasWebGL;
 	}
-	function _PrintFloatArray(array, size) {
-		for (var i = 0; i < size; i++)
-			console.log(HEAPF32[(array >> 2) + size]);
+	function _PrintFloatArray() {
+		err("missing function: PrintFloatArray");
+		abort(-1);
+	}
+	function _SetLocalStorage(key, user_id) {
+		localStorage.setItem(
+			Pointer_stringify(key),
+			Pointer_stringify(user_id)
+		);
 	}
 	function _StringReturnValueFunction() {
-		var returnStr = "bla";
-		var buffer = _malloc(lengthBytesUTF8(returnStr) + 1);
-		stringToUTF8(returnStr, buffer);
-		return buffer;
+		err("missing function: StringReturnValueFunction");
+		abort(-1);
 	}
 	function ___atomic_compare_exchange_8(
 		ptr,
@@ -20227,6 +20235,7 @@ function unityFramework(Module) {
 		_JS_SystemInfo_HasFullscreen: _JS_SystemInfo_HasFullscreen,
 		_JS_SystemInfo_HasWebGL: _JS_SystemInfo_HasWebGL,
 		_PrintFloatArray: _PrintFloatArray,
+		_SetLocalStorage: _SetLocalStorage,
 		_StringReturnValueFunction: _StringReturnValueFunction,
 		__ZSt18uncaught_exceptionv: __ZSt18uncaught_exceptionv,
 		___atomic_compare_exchange_8: ___atomic_compare_exchange_8,
