@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"net/http"
+	"os"
 
 	"github.com/gin-gonic/gin"
 	v2 "google.golang.org/api/oauth2/v2"
@@ -36,10 +37,10 @@ func GetToken(c *gin.Context) {
 	// 	"Email": tokenInfo.Email,
 	// })
 
-	c.SetCookie("Name", userinfo.Name, 3600, "/", "localhost", false, true)    //change localhost -> ?
-	c.SetCookie("ID", tokenInfo.UserId, 3600, "/", "localhost", false, true)   //change localhost -> ?
-	c.SetCookie("Email", tokenInfo.Email, 3600, "/", "localhost", false, true) //change localhost -> ?
+	c.SetCookie("Name", userinfo.Name, 3600, "/", os.Getenv("HostName"), false, true)
+	c.SetCookie("ID", tokenInfo.UserId, 3600, "/", os.Getenv("HostName"), false, true)
+	c.SetCookie("Email", tokenInfo.Email, 3600, "/", os.Getenv("HostName"), false, true)
 	fmt.Println("setted : ", tokenInfo.UserId, tokenInfo.Email)
 
-	c.Redirect(http.StatusTemporaryRedirect, "http://localhost")
+	c.Redirect(http.StatusTemporaryRedirect, "http://"+os.Getenv("HostName"))
 }

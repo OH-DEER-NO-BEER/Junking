@@ -11,7 +11,7 @@ import (
 
 func main() {
 	db, err := sql.Open("mysql",
-		"root:test@tcp(mysql:3306)/training_DB") //DB_HOST : mysql (not localhost)
+		"root:test@tcp(mysql:3306)/training_DB") //DB_HOST : mysql
 	if err != nil {
 		log.Fatal(err)
 	}
