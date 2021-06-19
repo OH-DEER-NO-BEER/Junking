@@ -12,9 +12,10 @@ services:
           - '443:443'
         links:
             - app
+        restart: always
         environment:
             STAGE: 'production'
-            DOMAINS: 'junking.tk => http://app:8080'
+            DOMAINS: 'junking.tk => www.junking.tk, www.junking.tk -> http://app:8080'
       
     app:
         container_name: app
