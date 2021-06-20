@@ -105,6 +105,11 @@ func (rh *roomsHub) CheckIn(c *gin.Context) {
 		log.Println(err.Error())
 		return
 	}
+
+	p := &client{ws}
+	// go p.read()
+	go p.write()
+
 	// con := &connection{send: make(chan []byte, 256), ws: ws}
 	// sub := subscription{conn: con, room: roomId}
 
@@ -118,10 +123,6 @@ func (rh *roomsHub) CheckIn(c *gin.Context) {
 			break
 		}
 	}
-
-	p := &client{ws}
-	// go p.read()
-	go p.write()
 
 	if len(rh.rooms[msg.roomId].clients) < 1 {
 		go rh.rooms[msg.roomId].run()
