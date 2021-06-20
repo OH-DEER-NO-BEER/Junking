@@ -10,7 +10,7 @@
 
 今まで相手が出した手，勝率などを見ることができる心理的要素を強化したじゃんけんアプリ
 
-## システム構成
+## System Configuration
 
 <div align="center">
 <img src="https://github.com/OH-DEER-NO-BEER/Junking/blob/main/images/gh-backend.png" width=60% height=60%>
@@ -25,17 +25,17 @@
 </div>
 
 ## For Developers
-### デプロイ
+### Deploy
 `main`ブランチに`push`されると自動でビルド，本番環境にデプロイされるようになっています．
-### Docker-composeのコマンド
-#### コンテナビルド 
+### Docker-compose command
+#### build
 `$ docker-compose build --build-arg GoogleClientID=ClientID --build-arg GoogleClientSecret=ClientSecret`
-#### コンテナ起動 
+#### run
 `$ docker-compose up -d`
-#### コンテナ＆ボリューム削除
+#### stop
 `$ docker-compose down -v`
-### コンテナ内コマンド
-#### コンテナログイン 
-`$ docker exec -it [image_name] bash`
-#### コンテナログアウト
+### container command
+#### run bash in the container
+`$ docker exec -it <container_name> bash`
+#### logout from the container
 `$ exit`
