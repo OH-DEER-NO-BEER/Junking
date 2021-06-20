@@ -68,7 +68,7 @@ function watchStorage() {
 			});
 			ws.send(
 				JSON.stringify({
-					"roomID": roomID
+					roomID: roomID
 				})
 			);
 			console.log(mockSelected);
