@@ -1,7 +1,7 @@
 // mockMessage (VISIBLE!)
 var mockMessageScene2 = {
-	message: "from JavaScript!",
-	myself: {
+	message: "roomEntered",
+	p1: {
 		name: "wakishi",
 		rate: {
 			rock: 0.1,
@@ -9,7 +9,7 @@ var mockMessageScene2 = {
 			paper: 0.8,
 		},
 	},
-	opponent: {
+	p2: {
 		name: "yokoro",
 		rate: {
 			rock: 0.3,
