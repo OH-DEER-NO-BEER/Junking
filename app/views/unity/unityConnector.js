@@ -1,5 +1,24 @@
 // mockMessage (VISIBLE!)
-var mockMessageScene2 = {
+var mockP1 = {
+	message: "Room Made",
+	p1: {
+		name: "wakishi",
+		rate: {
+			rock: 0.1,
+			scissors: 0.1,
+			paper: 0.8,
+		},
+	},
+	p2: {
+		name: "yokoro",
+		rate: {
+			rock: 0.3,
+			scissors: 0.3,
+			paper: 0.4,
+		},
+	},
+};
+var mockP2 = {
 	message: "from JavaScript!",
 	myself: {
 		name: "wakishi",
@@ -18,25 +37,7 @@ var mockMessageScene2 = {
 		},
 	},
 };
-var mockMessageScene3 = {
-	message: "from JavaScript!",
-	myself: {
-		name: "wakishi",
-		rate: {
-			rock: 0.1,
-			scissors: 0.1,
-			paper: 0.8,
-		},
-	},
-	opponent: {
-		name: "yokoro",
-		rate: {
-			rock: 0.3,
-			scissors: 0.3,
-			paper: 0.4,
-		},
-	},
-};
+var mockSelected;
 // setting for data
 let roomID = null;
 
@@ -74,9 +75,13 @@ function watchStorage() {
 		}
 	}, 1000);
 }
-
-
-
+// for test
+function mockSelectP1() {
+	mockSelected = mockP1;
+}
+function mockSelectP2() {
+	mockSelected = mockP2;
+}
 // do
 clearStorage();
 watchStorage();
