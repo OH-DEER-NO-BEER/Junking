@@ -4,7 +4,7 @@
     <header>
       <v-app-bar
         app
-        dark
+        dark  
         src='../../assets/junking.png'
       >
         <v-toolbar-title>Junking</v-toolbar-title>
