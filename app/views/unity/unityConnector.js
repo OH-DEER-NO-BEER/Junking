@@ -42,7 +42,7 @@ var mockSelected;
 let roomID = null;
 
 //WebSocket
-let ws = new WebSocket('wss://junking.tk/ws');
+let ws = new WebSocket('wss://junking.tk:8080/ws/');
 
 // methods related to storage
 function sentToUnity() {}
