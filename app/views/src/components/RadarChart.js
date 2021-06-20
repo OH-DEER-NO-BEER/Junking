@@ -37,21 +37,21 @@ var options = {
 				borderWidth: 3,
 			},
 		},
+
+		legend: {
+			display: true,
+			labels: {
+				fontSize: 20,
+			},
+		},
 		scale: {
+			pointLabels: {
+				fontSize: 13,
+			},
 			ticks: {
 				max: 1,
 				min: 0,
 				stepSize: 0.1,
-			},
-		},
-		plugins: {
-			legend: {
-				labels: {
-					// This more specific font property overrides the global property
-					font: {
-						size: 24,
-					},
-				},
 			},
 		},
 	},
