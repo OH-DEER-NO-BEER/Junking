@@ -27,7 +27,7 @@
 ## For Developers
 ### Deploy
 `main`ブランチに`push`されると自動でビルド，本番環境にデプロイされるようになっています．
-### Docker-compose command
+### docker-compose command
 #### build
 `$ docker-compose build --build-arg GoogleClientID=ClientID --build-arg GoogleClientSecret=ClientSecret`
 #### run
