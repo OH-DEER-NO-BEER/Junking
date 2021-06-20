@@ -2,11 +2,13 @@ import Vue from "vue";
 import App from "./App.vue";
 import vuetify from "./plugins/vuetify"; // path to vuetify export
 
-let vm = new Vue({
+var vm = new Vue({
 	el: "#app",
 	vuetify,
-	data: () => {},
+	data: () => {
+	},
 	methods: {},
-	mounted: function() {},
+	mounted: function() {
+	},
 	render: (h) => h(App),
 });
