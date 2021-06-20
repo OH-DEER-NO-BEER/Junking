@@ -3,20 +3,7 @@ version: "3"
 volumes:
     mysql_vol:
   
-services: 
-# HTTPS Reverse Proxy
-    https-portal:
-        image: steveltn/https-portal:1
-        ports:
-          - '80:80'
-          - '443:443'
-        links:
-            - app
-        restart: always
-        environment:
-            STAGE: 'production'
-            DOMAINS: 'junking.tk => www.junking.tk, www.junking.tk -> http://app:8080'
-      
+services:       
     app:
         container_name: app
         environment:
