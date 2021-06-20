@@ -16,6 +16,10 @@ var makeRoomMessageChan = make(chan makeRoomMessage)
 // 	Paper    float64 `json:"paper"`
 // }
 
+type roomId struct {
+	roomId string `json:"roomId"`
+}
+
 type person struct {
 	Name   string             `json:"name"`
 	Rate   map[string]float64 `json:"rate"`
@@ -92,8 +96,6 @@ func (r *room) run() {
 }
 
 func (rh *roomsHub) CheckIn(c *gin.Context) {
-	roomId := c.Param("roomId")
-	fmt.Print(roomId)
 	upgrader := websocket.Upgrader{
 		ReadBufferSize:  1024,
 		WriteBufferSize: 1024,
@@ -106,17 +108,29 @@ func (rh *roomsHub) CheckIn(c *gin.Context) {
 	// con := &connection{send: make(chan []byte, 256), ws: ws}
 	// sub := subscription{conn: con, room: roomId}
 
+	msg := roomId{}
+	for {
+		err := ws.ReadJSON(&msg)
+		if msg.roomId != "" {
+			fmt.Println(msg.roomId)
+			log.Printf("error: %v", err)
+			// delete(clients, ws)
+			break
+		}
+	}
+
 	p := &client{ws}
+	// go p.read()
 	go p.write()
 
-	if len(rh.rooms[roomId].clients) < 1 {
-		go rh.rooms[roomId].run()
+	if len(rh.rooms[msg.roomId].clients) < 1 {
+		go rh.rooms[msg.roomId].run()
 		var rates = map[string]float64{"Rock": 0.1, "Scissors": 0.2, "Paper": 0.7}
-		p1 := person{"P1", rates, 1, roomId}
+		p1 := person{"P1", rates, 1, msg.roomId}
 		makeRoomMessageChan <- makeRoomMessage{"RoomMade", p1}
 	} else {
 		var rates = map[string]float64{"Rock": 0.2, "Scissors": 0.2, "Paper": 0.6}
-		p2 := person{"P2", rates, 1, roomId}
+		p2 := person{"P2", rates, 1, msg.roomId}
 		makeRoomMessageChan <- makeRoomMessage{"RoomEnter", p2}
 	}
 
