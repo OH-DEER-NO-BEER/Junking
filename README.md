@@ -1,4 +1,4 @@
-[![Actions Status: build](https://github.com/OH-DEER-NO-BEER/Junking/actions/workflows/main_junking.yml/badge.svg)](https://github.com/OH-DEER-NO-BEER/Junking/actions?query=workflow%3A"Deploy docker-compose to GCE")
+[![Actions Status: build](https://github.com/OH-DEER-NO-BEER/Junking/actions/workflows/main_junking.yml/badge.svg)](https://github.com/OH-DEER-NO-BEER/Junking/actions?query=workflow%3A"Deploy%20docker-compose%20to%20GCE")
 
 # Junking
 
