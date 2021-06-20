@@ -37,10 +37,21 @@ var mockP2 = {
 		},
 	},
 };
+var mockP1Result = {
+	P1Hand: "rock",
+	P2Hand: "scissors",
+	result: "win",
+};
+var mockP2Result = {
+	P1Hand: "rock",
+	P2Hand: "scissors",
+	result: "lose",
+};
 var mockSelected;
+var mockSelectedResult;
+
 // setting for data
 let roomID = null;
-
 //WebSocket
 // let ws = new WebSocket('wss://junking.tk:8080/ws/');
 
@@ -49,16 +60,17 @@ function sentToUnity() {}
 function getRoomID() {
 	return localStorage.getItem("roomID");
 }
+function getSelectHand() {
+	return localStorage.getItem("selectHand");
+}
 function clearStorage() {
 	localStorage.clear();
 }
-function watchStorage() {
+function watchStorageRoomID() {
 	let intervalID = window.setInterval(function() {
 		roomID = getRoomID();
-		console.log("now: " + roomID);
 		if (roomID != null) {
 			// if roomID is written by Unity, go out of block
-			console.log(mockSelected);
 			uniIns.SendMessage(
 				// Send to Unity
 				"EventControl",
@@ -69,14 +81,31 @@ function watchStorage() {
 		}
 	}, 1000);
 }
+function watchStorageSelectHand() {
+	let intervalID = window.setInterval(function() {
+		selectHand = getSelectHand();
+		if (selectHand != null) {
+			console.log(mockSelectedResult);
+			uniIns.SendMessage(
+				// Send to Unity
+				"EventControl",
+				"SetJson",
+				JSON.stringify(mockSelectedResult)
+			);
+			clearInterval(intervalID);
+		}
+	}, 1000);
+}
 // for test
 function mockSelectP1() {
 	mockSelected = mockP1;
-	console.log(mockSelected);
+	mockSelectedResult = mockP1Result;
 }
 function mockSelectP2() {
 	mockSelected = mockP2;
+	mockSelectedResult = mockP2Result;
 }
 // do
 clearStorage();
-watchStorage();
+watchStorageRoomID();
+watchStorageSelectHand();
