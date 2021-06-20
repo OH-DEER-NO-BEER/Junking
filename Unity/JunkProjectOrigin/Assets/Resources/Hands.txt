@@ -1,0 +1,1 @@
+{"P1Hand":"rock","P2Hand":"scissors","result":"win"}
