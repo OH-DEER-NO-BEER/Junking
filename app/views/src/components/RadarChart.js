@@ -26,6 +26,14 @@ var options = {
 				borderWidth: 3,
 			},
 		},
+		scale: {
+			ticks: {
+				beginAtZero: true,
+				max: 1,
+				min: 0,
+				stepSize: 0.1,
+			},
+		},
 	},
 };
 

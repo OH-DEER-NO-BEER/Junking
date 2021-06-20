@@ -42,7 +42,7 @@ var mockSelected;
 let roomID = null;
 
 //WebSocket
-let ws = new WebSocket('wss://junking.tk/ws');
+let ws = new WebSocket("wss://junking.tk/ws");
 
 // methods related to storage
 function sentToUnity() {}
@@ -58,20 +58,27 @@ function watchStorage() {
 		console.log("now: " + roomID);
 		if (roomID != null) {
 			// if roomID is written by Unity, go out of block
-			ws.addEventListener('message', function(e) {
+			ws.addEventListener("message", function(e) {
 				console.log(e);
-				uniIns.SendMessage( // SEND to Unity
+				uniIns.SendMessage(
+					// SEND to Unity
 					"EventControl",
 					"SetJson",
-					JSON.stringify(mockMessageScene2)
-				);				
+					JSON.stringify(mockSelected)
+				);
 			});
+			// console.log(JSON.stringify(mockSelected));
 			ws.send(
 				JSON.stringify({
-					"roomID": roomID
+					roomID: roomID,
 				})
 			);
-			console.log(mockSelected);
+			uniIns.SendMessage(
+				// SEND to Unity
+				"EventControl",
+				"SetJson",
+				JSON.stringify(mockSelected)
+			);
 			clearInterval(intervalID);
 		}
 	}, 1000);
@@ -79,6 +86,7 @@ function watchStorage() {
 // for test
 function mockSelectP1() {
 	mockSelected = mockP1;
+	console.log(mockSelected);
 }
 function mockSelectP2() {
 	mockSelected = mockP2;

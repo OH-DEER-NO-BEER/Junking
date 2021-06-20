@@ -5,8 +5,9 @@
       <v-app-bar
         app
         dark
+        src='../../assets/junking.png'
       >
-        <v-toolbar-title>MyPortfolioSite</v-toolbar-title>
+        <v-toolbar-title>Junking</v-toolbar-title>
       </v-app-bar>
     </header>
   </v-app>
