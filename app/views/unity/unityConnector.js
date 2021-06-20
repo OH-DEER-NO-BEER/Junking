@@ -84,6 +84,7 @@ function watchStorage() {
 // for test
 function mockSelectP1() {
 	mockSelected = mockP1;
+	console.log(mockSelected);
 }
 function mockSelectP2() {
 	mockSelected = mockP2;
