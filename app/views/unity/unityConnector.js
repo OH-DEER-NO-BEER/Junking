@@ -40,6 +40,10 @@ var mockP2 = {
 var mockSelected;
 // setting for data
 let roomID = null;
+
+//WebSocket
+let ws = new WebSocket('wss://junking.tk/ws');
+
 // methods related to storage
 function sentToUnity() {}
 function getRoomID() {
@@ -54,11 +58,18 @@ function watchStorage() {
 		console.log("now: " + roomID);
 		if (roomID != null) {
 			// if roomID is written by Unity, go out of block
-			// SEND
-			uniIns.SendMessage(
-				"EventControl",
-				"SetJson",
-				JSON.stringify(mockSelected)
+			ws.addEventListener('message', function(e) {
+				console.log(e);
+				uniIns.SendMessage( // SEND to Unity
+					"EventControl",
+					"SetJson",
+					JSON.stringify(mockMessageScene2)
+				);				
+			});
+			ws.send(
+				JSON.stringify({
+					"roomID": roomID
+				})
 			);
 			console.log(mockSelected);
 			clearInterval(intervalID);
