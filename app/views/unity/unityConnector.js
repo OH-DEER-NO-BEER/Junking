@@ -58,19 +58,33 @@ function watchStorage() {
 		console.log("now: " + roomID);
 		if (roomID != null) {
 			// if roomID is written by Unity, go out of block
-			ws.addEventListener('message', function(e) {
-				console.log(e);
+			ws.onmessage = function(e){
+				console.log(e.data);
 				uniIns.SendMessage( // SEND to Unity
 					"EventControl",
 					"SetJson",
 					JSON.stringify(mockMessageScene2)
 				);				
-			});
-			ws.send(
+			};
+			// ws.addEventListener('message', function(e) {
+			// 	console.log(e);
+			// 	uniIns.SendMessage( // SEND to Unity
+			// 		"EventControl",
+			// 		"SetJson",
+			// 		JSON.stringify(mockMessageScene2)
+			// 	);				
+			// });
+			ws.onopen = () => ws.send(
 				JSON.stringify({
 					roomID: roomID
 				})
 			);
+
+			// ws.send(
+			// 	JSON.stringify({
+			// 		roomID: roomID
+			// 	})
+			// );
 			clearInterval(intervalID);
 		}
 	}, 1000);
