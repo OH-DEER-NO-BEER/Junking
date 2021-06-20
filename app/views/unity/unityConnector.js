@@ -65,6 +65,7 @@ function watchStorage() {
 				})
 			);
 			ws.onmessage = function(e){
+				console.log("data came");
 				console.log(e.data);
 				uniIns.SendMessage( // SEND to Unity
 					"EventControl",
