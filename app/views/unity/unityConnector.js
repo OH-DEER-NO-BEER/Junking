@@ -1,6 +1,6 @@
 // mockMessage (VISIBLE!)
-var mockMessageScene2 = {
-	message: "roomEntered",
+var mockP1 = {
+	message: "Room Made",
 	p1: {
 		name: "wakishi",
 		rate: {
@@ -18,7 +18,7 @@ var mockMessageScene2 = {
 		},
 	},
 };
-var mockMessageScene3 = {
+var mockP2 = {
 	message: "from JavaScript!",
 	myself: {
 		name: "wakishi",
@@ -37,6 +37,7 @@ var mockMessageScene3 = {
 		},
 	},
 };
+var mockSelected;
 // setting for data
 let roomID = null;
 // methods related to storage
@@ -57,11 +58,18 @@ function watchStorage() {
 			uniIns.SendMessage(
 				"EventControl",
 				"SetJson",
-				JSON.stringify(mockMessageScene2)
+				JSON.stringify(mockSelected)
 			);
 			clearInterval(intervalID);
 		}
 	}, 1000);
+}
+// for test
+function mockSelectP1() {
+	mockSelected = mockP1;
+}
+function mockSelectP2() {
+	mockSelected = mockP2;
 }
 // do
 clearStorage();
