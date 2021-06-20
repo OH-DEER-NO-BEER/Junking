@@ -1,5 +1,32 @@
 package controllers
 
+import (
+	"fmt"
+	"log"
+
+	"github.com/gin-gonic/gin"
+	"github.com/gorilla/websocket"
+)
+
+var makeRoomMessageChan = make(chan makeRoomMessage)
+
+// type Rate struct {
+// 	Rock     float64 `json:rock`
+// 	Scissors float64 `json:scissors`
+// 	Paper    float64 `json:"paper"`
+// }
+
+type person struct {
+	Name   string             `json:"name"`
+	Rate   map[string]float64 `json:"rate"`
+	Rank   int                `json:"rank"`
+	RoomId string             `json:"roomid"`
+}
+type makeRoomMessage struct {
+	Message string `json:"message"`
+	P1      person `json:"P1"`
+}
+
 type message struct {
 	data []byte
 	room string
@@ -10,63 +37,88 @@ type subscription struct {
 	room string
 }
 
-// hub maintains the set of active connections and broadcasts messages to the
-// connections.
-type hub struct {
-	// Registered connections.
-	rooms map[string]map[*connection]bool
-
-	// Inbound messages from the connections.
-	broadcast chan message
-
-	// Register requests from the connections.
-	register chan subscription
-
-	// Unregister requests from connections.
-	unregister chan subscription
+type connection struct {
+	ws   *websocket.Conn
+	send chan []byte
 }
 
-var rooomsHub = hub{
+type client struct {
+	socket *websocket.Conn
+	// send   chan []byte
+	// room   *room
+}
+
+type room struct {
+	join    chan *client
+	clients map[*client]bool
+	// conn    map[socket]bool
+}
+
+var RoomsHub = roomsHub{
 	broadcast:  make(chan message),
 	register:   make(chan subscription),
 	unregister: make(chan subscription),
-	rooms:      make(map[string]map[*connection]bool),
+	rooms:      make(map[string]*room),
 }
 
-func (h *hub) run() {
+type roomsHub struct {
+	rooms      map[string]*room
+	broadcast  chan message
+	register   chan subscription
+	unregister chan subscription
+}
+
+func (cl *client) write() {
 	for {
 		select {
-		case s := <-h.register:
-			connections := h.rooms[s.room]
-			if connections == nil {
-				connections = make(map[*connection]bool)
-				h.rooms[s.room] = connections
-			}
-			h.rooms[s.room][s.conn] = true
-		case s := <-h.unregister:
-			connections := h.rooms[s.room]
-			if connections != nil {
-				if _, ok := connections[s.conn]; ok {
-					delete(connections, s.conn)
-					close(s.conn.send)
-					if len(connections) == 0 {
-						delete(h.rooms, s.room)
-					}
-				}
-			}
-		case m := <-h.broadcast:
-			connections := h.rooms[m.room]
-			for c := range connections {
-				select {
-				case c.send <- m.data:
-				default:
-					close(c.send)
-					delete(connections, c)
-					if len(connections) == 0 {
-						delete(h.rooms, m.room)
-					}
-				}
+		case msg := <-makeRoomMessageChan:
+			// t, _ := json.Marshal(msg)
+			// fmt.Print(t)
+			if err := cl.socket.WriteJSON(msg); err != nil {
+				break
 			}
 		}
 	}
+	// c.socket.Close()
+}
+
+func (r *room) run() {
+	for {
+		select {
+		case client := <-r.join:
+			r.clients[client] = true
+		}
+	}
+}
+
+func (rh *roomsHub) CheckIn(c *gin.Context) {
+	roomId := c.Param("roomId")
+	fmt.Print(roomId)
+	upgrader := websocket.Upgrader{
+		ReadBufferSize:  1024,
+		WriteBufferSize: 1024,
+	}
+	ws, err := upgrader.Upgrade(c.Writer, c.Request, nil)
+	if err != nil {
+		log.Println(err.Error())
+		return
+	}
+	// con := &connection{send: make(chan []byte, 256), ws: ws}
+	// sub := subscription{conn: con, room: roomId}
+
+	p := &client{ws}
+	go p.write()
+
+	if len(rh.rooms[roomId].clients) < 1 {
+		go rh.rooms[roomId].run()
+		var rates = map[string]float64{"Rock": 0.1, "Scissors": 0.2, "Paper": 0.7}
+		p1 := person{"P1", rates, 1, roomId}
+		makeRoomMessageChan <- makeRoomMessage{"RoomMade", p1}
+	} else {
+		var rates = map[string]float64{"Rock": 0.2, "Scissors": 0.2, "Paper": 0.6}
+		p2 := person{"P2", rates, 1, roomId}
+		makeRoomMessageChan <- makeRoomMessage{"RoomEnter", p2}
+	}
+
+	defer ws.Close()
 }

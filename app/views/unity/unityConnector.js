@@ -39,6 +39,10 @@ var mockMessageScene3 = {
 };
 // setting for data
 let roomID = null;
+
+//WebSocket
+let ws = new WebSocket('ws://' + window.location.host + '/ws/');
+
 // methods related to storage
 function sentToUnity() {}
 function getRoomID() {
@@ -53,16 +57,26 @@ function watchStorage() {
 		console.log("now: " + roomID);
 		if (roomID != null) {
 			// if roomID is written by Unity, go out of block
-			// SEND
-			uniIns.SendMessage(
-				"EventControl",
-				"SetJson",
-				JSON.stringify(mockMessageScene2)
+			ws.addEventListener('message', function(e) {
+				console.log(e);
+				uniIns.SendMessage( // SEND to Unity
+					"EventControl",
+					"SetJson",
+					JSON.stringify(mockMessageScene2)
+				);				
+			});
+			ws.send(
+				JSON.stringify({
+					"roomID": roomID
+				})
 			);
 			clearInterval(intervalID);
 		}
 	}, 1000);
 }
+
+
+
 // do
 clearStorage();
 watchStorage();

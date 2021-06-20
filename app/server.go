@@ -26,6 +26,8 @@ func sampleMiddleware() gin.HandlerFunc {
 }
 
 func main() {
+	// go controllers.InitRoomHub()
+
 	engine := gin.Default()
 
 	engine.LoadHTMLGlob("views/*.html")
@@ -48,7 +50,7 @@ func main() {
 			c.HTML(http.StatusOK, "index.html", gin.H{})
 		})
 
-		loginGroup.GET("/ws:roomId", controllers.CheckIn)
+		loginGroup.GET("/ws", controllers.RoomsHub.CheckIn)
 	}
 
 	err := engine.Run(":8080")
