@@ -71,6 +71,7 @@ function watchStorage() {
 					"roomID": roomID
 				})
 			);
+			console.log(mockSelected);
 			clearInterval(intervalID);
 		}
 	}, 1000);
