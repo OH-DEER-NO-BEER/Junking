@@ -42,7 +42,7 @@ var mockSelected;
 let roomID = null;
 
 //WebSocket
-let ws = new WebSocket("wss://junking.tk:8080/ws/");
+// let ws = new WebSocket('wss://junking.tk:8080/ws/');
 
 // methods related to storage
 function sentToUnity() {}
@@ -58,21 +58,26 @@ function watchStorage() {
 		console.log("now: " + roomID);
 		if (roomID != null) {
 			// if roomID is written by Unity, go out of block
-			ws.addEventListener("message", function(e) {
-				console.log(e);
-				uniIns.SendMessage(
-					// SEND to Unity
-					"EventControl",
-					"SetJson",
-					JSON.stringify(mockSelected)
-				);
-			});
-			// console.log(JSON.stringify(mockSelected));
-			ws.send(
-				JSON.stringify({
-					roomID: roomID,
-				})
-			);
+			console.log(mockSelected);
+			let ws = new WebSocket('wss://junking.tk:8080/ws/');
+			ws.onopen = function(event){
+				console.log(event.data);
+				ws.send(
+					JSON.stringify({
+						roomID: roomID
+					})
+				);	
+				ws.onmessage = function(e){
+					console.log("data came");
+					console.log(e.data);
+					uniIns.SendMessage( // Send to Unity
+						"EventControl",
+						"SetJson",
+						JSON.stringify(mockMessageScene2)
+					);				
+				}
+			}
+			clearInterval(intervalID);
 		}
 	}, 1000);
 }
