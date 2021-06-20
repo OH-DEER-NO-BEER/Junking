@@ -63,7 +63,7 @@ function watchStorage() {
 				// Send to Unity
 				"EventControl",
 				"SetJson",
-				JSON.stringify(mockMessageScene2)
+				JSON.stringify(mockSelected)
 			);
 			clearInterval(intervalID);
 		}
