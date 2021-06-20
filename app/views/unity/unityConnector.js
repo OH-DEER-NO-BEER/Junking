@@ -19,8 +19,8 @@ var mockP1 = {
 	},
 };
 var mockP2 = {
-	message: "from JavaScript!",
-	myself: {
+	message: "Room Entered",
+	p1: {
 		name: "wakishi",
 		rate: {
 			rock: 0.1,
@@ -28,7 +28,7 @@ var mockP2 = {
 			paper: 0.8,
 		},
 	},
-	opponent: {
+	p2: {
 		name: "yokoro",
 		rate: {
 			rock: 0.3,
@@ -79,7 +79,7 @@ function watchStorage() {
 					roomID: roomID
 				})
 			);
-
+			console.log(mockSelected);
 			// ws.send(
 			// 	JSON.stringify({
 			// 		roomID: roomID
