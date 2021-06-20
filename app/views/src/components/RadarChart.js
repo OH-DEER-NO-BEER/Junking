@@ -44,6 +44,16 @@ var options = {
 				stepSize: 0.1,
 			},
 		},
+		plugins: {
+			legend: {
+				labels: {
+					// This more specific font property overrides the global property
+					font: {
+						size: 24,
+					},
+				},
+			},
+		},
 	},
 };
 
