@@ -1,0 +1,48 @@
+version: "3"
+
+volumes:
+    mysql_vol:
+  
+services:    
+# HTTPS Reverse Proxy
+    https-portal:
+        image: steveltn/https-portal:1
+        ports:
+          - '80:80'
+          - '443:443'
+        links:
+            - app
+        restart: always
+        environment:
+            STAGE: 'local'
+            DOMAINS: 'localhost -> http://app:8080'
+            
+    app:
+        container_name: app
+        environment:
+            - "GOPATH=/go"
+        build: 
+            context: ./app
+            dockerfile: Dockerfile
+            args:
+                - GoogleClientID=test
+                - GoogleClientSecret=test
+        tty: true
+        volumes:
+            - ./app:/go/src/Junking
+        ports: 
+            - "8080:8080"
+        depends_on: 
+            - db
+
+    db:
+        container_name: db
+        build:
+            context: ./db
+            dockerfile: Dockerfile
+        volumes:
+        - mysql_vol:/var/lib/mysql:delegated
+        environment:
+        - MYSQL_ROOT_PASSWORD=test
+        ports:
+        - "3306:3306" 
