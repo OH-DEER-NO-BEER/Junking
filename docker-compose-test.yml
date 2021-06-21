@@ -14,7 +14,7 @@ services:
             - app
         restart: always
         environment:
-            STAGE: 'local'
+            #STAGE: 'local'
             DOMAINS: 'localhost -> http://app:8080'
             
     app:
@@ -27,7 +27,7 @@ services:
             args:
                 - GoogleClientID=test
                 - GoogleClientSecret=test
-                - HostName=localhost
+                - HostName=localhost  
         tty: true
         volumes:
             - ./app:/go/src/Junking

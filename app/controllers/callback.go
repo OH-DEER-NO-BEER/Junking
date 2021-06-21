@@ -42,5 +42,5 @@ func GetToken(c *gin.Context) {
 	c.SetCookie("Email", tokenInfo.Email, 3600, "/", os.Getenv("HostName"), false, true)
 	fmt.Println("setted : ", tokenInfo.UserId, tokenInfo.Email)
 
-	c.Redirect(http.StatusTemporaryRedirect, "https://"+os.Getenv("HostName"))
+	c.Redirect(http.StatusTemporaryRedirect, "/")
 }
