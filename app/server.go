@@ -29,6 +29,7 @@ func main() {
 	// go controllers.InitRoomHub()
 
 	engine := gin.Default()
+	// engine := gin.New()
 
 	engine.LoadHTMLGlob("views/*.html")
 	engine.Static("/js", "./views/dist")
@@ -50,10 +51,13 @@ func main() {
 			c.HTML(http.StatusOK, "index.html", gin.H{})
 		})
 
-		loginGroup.GET("/ws", controllers.RoomsHub.CheckIn)
 	}
 
+	engine.GET("/ws", controllers.RoomsHub.CheckIn)
+
+	// err := engine.RunTLS(":8080")
 	err := engine.Run(":8080")
+
 	if err != nil {
 		log.Fatal("Run: ", err)
 	}

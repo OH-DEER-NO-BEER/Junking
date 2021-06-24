@@ -1,14 +1,36 @@
 import Vue from "vue";
-import App from "./App.vue";
-import vuetify from "./plugins/vuetify"; // path to vuetify export
+// import App from "./App.vue";
+// import vuetify from "./plugins/vuetify"; // path to vuetify export
 
+console.log("test");
 var vm = new Vue({
 	el: "#app",
-	vuetify,
-	data: () => {
+	// vuetify,
+	data: {
+		ws: null,
+		temp: 0,
+		roomID: "test room"
 	},
-	methods: {},
 	mounted: function() {
+		console.log("created");
+		this.ws = new WebSocket('ws://' + window.location.host + '/ws');		
+		this.ws.onmessage = function(msg){
+			console.log(JSON.parse(msg.data));
+		}
 	},
-	render: (h) => h(App),
+	methods: {
+		sendRoomID: function (){
+			console.log(JSON.stringify({roomId: this.roomID}));
+			this.ws.send(
+				JSON.stringify({
+					roomId: this.roomID
+				})
+			);	
+		},
+	},
+	// render: (h) => h(App),
 });
+
+vm.ws.onopen = function(){
+	vm.sendRoomID();
+}

@@ -8,20 +8,15 @@
 </template>
 
 <script>
-import BarChart from './BarChart';
-import RadarChart from './RadarChart';
+// import BarChart from './BarChart';
+// import RadarChart from './RadarChart';
 
 export default {
-  components: {
-    BarChart,
-    RadarChart,
-  },
-  data(){
-    // data should be write down below
-    return{
-    }
-  },
-  mounted(){
+  // components: {
+  //   BarChart,
+  //   RadarChart,
+  // },
+  mounted:{
   },
   methods:{
   }

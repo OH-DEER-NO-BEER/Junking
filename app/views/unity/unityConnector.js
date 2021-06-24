@@ -53,7 +53,14 @@ var mockSelectedResult;
 // setting for data
 let roomID = null;
 //WebSocket
+roomID = 'test';
+// let ws = new WebSocket('wss://' + window.location.host + '/ws/'+roomID);
+// let ws = new WebSocket('wss://' + window.location.host + '/ws');
+// console.log('wss://' + window.location.host + '/ws');
 // let ws = new WebSocket('wss://junking.tk:8080/ws/');
+// ws.onopen = function(event){
+// 	console.log("opened!");
+// };
 
 // methods related to storage
 function sentToUnity() {}
@@ -68,8 +75,17 @@ function clearStorage() {
 }
 function watchStorageRoomID() {
 	let intervalID = window.setInterval(function() {
+		console.log("test");
 		roomID = getRoomID();
 		if (roomID != null) {
+			// ws.onopen = function(event){
+			// 	console.log("opened!");
+			// };
+			ws.send(
+				JSON.stringify({
+					roomId: roomID
+				})
+			);
 			// if roomID is written by Unity, go out of block
 			uniIns.SendMessage(
 				// Send to Unity
@@ -105,7 +121,20 @@ function mockSelectP2() {
 	mockSelected = mockP2;
 	mockSelectedResult = mockP2Result;
 }
+
+// function connectWebSocket(){
+// 	ws.onopen = function(){
+// 		console.log(JON.stringify({roomId: roomID}));
+// 		ws.send(
+// 			JSON.stringify({
+// 				roomId: roomID
+// 			})
+// 		);	
+// 	}
+// }
+
 // do
-clearStorage();
-watchStorageRoomID();
-watchStorageSelectHand();
+// clearStorage();
+// watchStorageRoomID();
+// watchStorageSelectHand();
+// connectWebSocket();
