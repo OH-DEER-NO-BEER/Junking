@@ -96,7 +96,6 @@ func (r *room) run() {
 	}
 }
 
-// func CheckIn(c *gin.Context) {
 func (rh *roomsHub) CheckIn(c *gin.Context) {
 	fmt.Println("checkin' in")
 	upgrader := websocket.Upgrader{
@@ -109,17 +108,16 @@ func (rh *roomsHub) CheckIn(c *gin.Context) {
 		return
 	}
 
-	p := &client{ws}
+	clt := &client{ws}
+
 	// // go p.read()
-	go p.write()
+	go clt.write()
 
 	// // con := &connection{send: make(chan []byte, 256), ws: ws}
 	// // sub := subscription{conn: con, room: roomId}
 
-	// var roomId = c.Param("roomId")
-	// fmt.Println(roomId)
-
 	var msg roomId
+	var p_tmp_json = person{}
 	for {
 		err := ws.ReadJSON(&msg)
 		if err != nil {
@@ -130,27 +128,34 @@ func (rh *roomsHub) CheckIn(c *gin.Context) {
 		}
 		if msg.RoomId != "" {
 			fmt.Println(msg.RoomId)
+			if _, ok := rh.rooms[msg.RoomId]; !ok {
+				fmt.Println("create room")
+				var clients = map[*client]bool{clt: true}
+				rh.rooms[msg.RoomId] = &room{clients: clients}
+				fmt.Println(rh.rooms[msg.RoomId].clients[clt])
+
+				// if len(rh.rooms[msg.roomId].clients) < 1 {
+				// go rh.rooms["test"].run()
+				// makeRoomMessageChan <- makeRoomMessage{"RoomMade", p1}
+
+				var rates = map[string]float64{"Rock": 0.1, "Scissors": 0.2, "Paper": 0.7}
+				p_tmp_json = person{"P1", rates, 1, "test"}
+			} else {
+				fmt.Println("room exists")
+				rh.rooms[msg.RoomId].clients[clt] = true
+				var rates = map[string]float64{"Rock": 0.2, "Scissors": 0.2, "Paper": 0.6}
+				p_tmp_json = person{"P2", rates, 1, "test"}
+				// makeRoomMessageChan <- makeRoomMessage{"RoomEnter", p2}
+			}
 			break
 		}
 	}
 
-	if 0 < 1 {
-		// if len(rh.rooms[msg.roomId].clients) < 1 {
-		// go rh.rooms["test"].run()
-		var rates = map[string]float64{"Rock": 0.1, "Scissors": 0.2, "Paper": 0.7}
-		p1 := person{"P1", rates, 1, "test"}
-		// makeRoomMessageChan <- makeRoomMessage{"RoomMade", p1}
-		p1_json, _ := json.Marshal(p1)
-		connectionErr := ws.WriteJSON(string(p1_json))
-		if connectionErr != nil {
-			log.Println("write:", connectionErr)
-		}
+	p_json, _ := json.Marshal(p_tmp_json)
+	connectionErr := ws.WriteJSON(string(p_json))
+	if connectionErr != nil {
+		log.Println("write:", connectionErr)
 	}
-	// } else {
-	// 	var rates = map[string]float64{"Rock": 0.2, "Scissors": 0.2, "Paper": 0.6}
-	// 	p2 := person{"P2", rates, 1, msg.roomId}
-	// 	makeRoomMessageChan <- makeRoomMessage{"RoomEnter", p2}
-	// }
 
 	defer ws.Close()
 }

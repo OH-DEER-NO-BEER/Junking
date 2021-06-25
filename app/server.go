@@ -50,10 +50,10 @@ func main() {
 		loginGroup.GET("/app", func(c *gin.Context) {
 			c.HTML(http.StatusOK, "index.html", gin.H{})
 		})
-
+		loginGroup.GET("/ws", controllers.RoomsHub.CheckIn)
 	}
 
-	engine.GET("/ws", controllers.RoomsHub.CheckIn)
+	// go controllers.RoomsHub.Run()
 
 	// err := engine.RunTLS(":8080")
 	err := engine.Run(":8080")
