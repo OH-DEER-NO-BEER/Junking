@@ -13,9 +13,10 @@ var vm = new Vue({
 	},
 	mounted: function() {
 		console.log("created");
-		this.ws = new WebSocket('ws://' + window.location.host + '/ws');		
-		this.ws.onmessage = function(msg){
-			console.log(JSON.parse(msg.data));
+		this.ws = new WebSocket('ws://' + window.location.host + '/ws'); //websocketアクセス
+
+		this.ws.onmessage = function(msg){ //サーバーからのwebsocketからのデータ受信時に
+			console.log(JSON.parse(msg.data)); //受信したデータを表示
 		}
 	},
 	methods: {
@@ -31,6 +32,6 @@ var vm = new Vue({
 	render: (h) => h(App),
 });
 
-vm.ws.onopen = function(){
+vm.ws.onopen = function(){ //websocket開通時にroomIDを送っている。(mock用なので直接onopenの中に入れるのは今だけ)
 	vm.sendRoomID();
 }

@@ -142,18 +142,18 @@ func (rh *roomsHub) CheckIn(c *gin.Context) {
 				// go rh.rooms["test"].run()
 				// makeRoomMessageChan <- makeRoomMessage{"RoomMade", p1}
 
-				var rates1 = map[string]float64{"Rock": 0.1, "Scissors": 0.2, "Paper": 0.7}
+				var rates1 = map[string]float64{"rock": 0.1, "scissors": 0.2, "paper": 0.7}
 				p1_tmp_json := player{"P1", rates1, 1, msg.RoomId}
-				p2_tmp_json := player{"", map[string]float64{"Rock": 0.0, "Scissors": 0.0, "Paper": 0.0}, 1, msg.RoomId}
+				p2_tmp_json := player{"", map[string]float64{"rock": 0.0, "scissors": 0.0, "paper": 0.0}, 1, msg.RoomId}
 				tmp_room_json = roomMessage{"created room", p1_tmp_json, p2_tmp_json}
 
 			} else if len(rh.rooms[msg.RoomId].clients) < 2 {
 				fmt.Println("room exists")
 				rh.rooms[msg.RoomId].clients[clt] = true
 
-				var rates1 = map[string]float64{"Rock": 0.1, "Scissors": 0.2, "Paper": 0.7}
+				var rates1 = map[string]float64{"rock": 0.1, "scissors": 0.2, "paper": 0.7}
 				p1_tmp_json := player{"P1", rates1, 1, msg.RoomId}
-				var rates2 = map[string]float64{"Rock": 0.2, "Scissors": 0.2, "Paper": 0.6}
+				var rates2 = map[string]float64{"rock": 0.2, "scissors": 0.2, "paper": 0.6}
 				p2_tmp_json := player{"P2", rates2, 1, msg.RoomId}
 				tmp_room_json = roomMessage{"checked in", p1_tmp_json, p2_tmp_json}
 				// makeRoomMessageChan <- makeRoomMessage{"RoomEnter", p2}
@@ -161,8 +161,8 @@ func (rh *roomsHub) CheckIn(c *gin.Context) {
 			} else {
 				fmt.Println("room's full!!!")
 
-				p1_tmp_json := player{"", map[string]float64{"Rock": 0.0, "Scissors": 0.0, "Paper": 0.0}, 1, msg.RoomId}
-				p2_tmp_json := player{"", map[string]float64{"Rock": 0.0, "Scissors": 0.0, "Paper": 0.0}, 1, msg.RoomId}
+				p1_tmp_json := player{"", map[string]float64{"rock": 0.0, "scissors": 0.0, "paper": 0.0}, 1, msg.RoomId}
+				p2_tmp_json := player{"", map[string]float64{"rock": 0.0, "scissors": 0.0, "paper": 0.0}, 1, msg.RoomId}
 				tmp_room_json = roomMessage{"room's full!!!", p1_tmp_json, p2_tmp_json}
 
 			}
