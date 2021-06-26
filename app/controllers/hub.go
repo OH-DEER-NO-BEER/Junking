@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"Junking/models"
 	"encoding/json"
 	"fmt"
 	"log"
@@ -110,6 +111,8 @@ func (rh *roomsHub) CheckIn(c *gin.Context) {
 	}
 
 	clt := &client{ws}
+	models.AddUserData("tetuser", "testaddress")
+	models.ShowUserData()
 
 	// // go p.read()
 	// go clt.write()
