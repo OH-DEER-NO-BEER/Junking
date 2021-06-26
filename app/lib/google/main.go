@@ -12,6 +12,13 @@ const (
 )
 
 func GetConnection() *oauth2.Config {
+	var protocol string
+	if os.Getenv("HostName") == "localhost" {
+		protocol = "http://"
+	} else {
+		protocol = "https://"
+	}
+
 	config := &oauth2.Config{
 		ClientID:     os.Getenv("GoogleClientID"),
 		ClientSecret: os.Getenv("GoogleClientSecret"),
@@ -19,7 +26,7 @@ func GetConnection() *oauth2.Config {
 			AuthURL:  authorizeEndpoint,
 			TokenURL: tokenEndpoint,
 		},
-		RedirectURL: "http://" + os.Getenv("HostName") + ":8080/google/callback",
+		RedirectURL: protocol + os.Getenv("HostName") + ":8080/google/callback",
 		Scopes:      []string{"openid", "email", "profile"},
 	}
 	return config
