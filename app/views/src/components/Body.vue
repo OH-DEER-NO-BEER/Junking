@@ -16,12 +16,7 @@ export default {
     BarChart,
     RadarChart,
   },
-  data(){
-    // data should be write down below
-    return{
-    }
-  },
-  mounted(){
+  mounted:{
   },
   methods:{
   }

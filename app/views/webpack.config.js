@@ -1,6 +1,13 @@
 const VueLoaderPlugin = require("vue-loader/lib/plugin");
+const path = require('path');
 
 module.exports = {
+	entry: './src/index.js',
+	output: {
+		path: '/go/src/Junking/views/dist',
+		filename: './main.js'
+	},
+
 	mode: "development",
 	module: {
 		rules: [
@@ -46,5 +53,6 @@ module.exports = {
 		alias: {
 			vue$: "vue/dist/vue.esm.js",
 		},
+		// modules: [path.resolve(__dirname, "src"), "node_modules"]
 	},
 };

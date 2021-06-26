@@ -2,8 +2,8 @@ FROM golang:latest
 
 WORKDIR /go/src/Junking/views 
 RUN apt-get update && apt-get install -y git && apt-get install -y nodejs npm && npm install
+#  && npm run build
 # RUN apk update && apk add git && apk add nodejs && apk add --update npm && npm install && npm run build
-
 WORKDIR /go/src/Junking
 
 ENV GO111MODULE=on
@@ -20,5 +20,8 @@ ENV HostName=${HostName}
 EXPOSE 8080
 
 # RUN go mod tidy
+COPY ./startup.sh /go/src/Junking/startup.sh
+RUN chmod 755 /go/src/Junking/startup.sh
 
-CMD ["go", "run", "server.go"]
+# CMD ["go", "run", "server.go"]
+ENTRYPOINT ["sh", "/go/src/Junking/startup.sh"]

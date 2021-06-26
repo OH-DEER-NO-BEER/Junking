@@ -52,8 +52,6 @@ var mockSelectedResult;
 
 // setting for data
 let roomID = null;
-//WebSocket
-// let ws = new WebSocket('wss://junking.tk:8080/ws/');
 
 // methods related to storage
 function sentToUnity() {}
@@ -70,7 +68,6 @@ function watchStorageRoomID() {
 	let intervalID = window.setInterval(function() {
 		roomID = getRoomID();
 		if (roomID != null) {
-			// if roomID is written by Unity, go out of block
 			uniIns.SendMessage(
 				// Send to Unity
 				"EventControl",
@@ -105,6 +102,7 @@ function mockSelectP2() {
 	mockSelected = mockP2;
 	mockSelectedResult = mockP2Result;
 }
+
 // do
 clearStorage();
 watchStorageRoomID();
