@@ -16,7 +16,7 @@ export default {
     BarChart,
     RadarChart,
   },
-  mounted:{
+  mounted () {
   },
   methods:{
   }
