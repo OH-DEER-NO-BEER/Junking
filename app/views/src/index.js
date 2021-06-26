@@ -1,11 +1,11 @@
 import Vue from "vue";
-// import App from "./App.vue";
-// import vuetify from "./plugins/vuetify"; // path to vuetify export
+import App from "./App.vue";
+import vuetify from "./plugins/vuetify"; // path to vuetify export
 
 console.log("test");
 var vm = new Vue({
 	el: "#app",
-	// vuetify,
+	vuetify,
 	data: {
 		ws: null,
 		temp: 0,
@@ -28,7 +28,7 @@ var vm = new Vue({
 			);	
 		},
 	},
-	// render: (h) => h(App),
+	render: (h) => h(App),
 });
 
 vm.ws.onopen = function(){

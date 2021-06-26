@@ -8,14 +8,14 @@
 </template>
 
 <script>
-// import BarChart from './BarChart';
-// import RadarChart from './RadarChart';
+import BarChart from './BarChart';
+import RadarChart from './RadarChart';
 
 export default {
-  // components: {
-  //   BarChart,
-  //   RadarChart,
-  // },
+  components: {
+    BarChart,
+    RadarChart,
+  },
   mounted:{
   },
   methods:{
