@@ -12,12 +12,13 @@ const (
 )
 
 func GetConnection() *oauth2.Config {
-	var protocol string
-	if os.Getenv("HostName") == "localhost" {
-		protocol = "http://"
-	} else {
-		protocol = "https://"
-	}
+	// var protocol string
+	// if os.Getenv("HostName") == "localhost" {
+	// 	protocol = "http://"
+	// } else {
+	// 	protocol = "https://"
+	// }
+	protocol := "https://"
 
 	config := &oauth2.Config{
 		ClientID:     os.Getenv("GoogleClientID"),
