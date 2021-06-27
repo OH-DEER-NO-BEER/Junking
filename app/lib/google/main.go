@@ -18,7 +18,6 @@ func GetConnection() *oauth2.Config {
 	// } else {
 	// 	protocol = "https://"
 	// }
-	protocol := "https://"
 
 	config := &oauth2.Config{
 		ClientID:     os.Getenv("GoogleClientID"),
@@ -27,7 +26,7 @@ func GetConnection() *oauth2.Config {
 			AuthURL:  authorizeEndpoint,
 			TokenURL: tokenEndpoint,
 		},
-		RedirectURL: protocol + os.Getenv("HostName") + ":8080/google/callback",
+		RedirectURL: "https://" + os.Getenv("HostName") + ":8080/google/callback",
 		Scopes:      []string{"openid", "email", "profile"},
 	}
 	return config
