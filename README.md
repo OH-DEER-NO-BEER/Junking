@@ -41,5 +41,5 @@
 `$ exit`
   
 ### Vue.js Building
-`$ cd ${PATH_TO_PACKAGE_JSON_FOLDER}`
+`$ cd ${PATH_TO_PACKAGE_JSON_FOLDER}`  
 `$ npm run build`
