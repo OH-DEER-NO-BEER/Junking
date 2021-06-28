@@ -39,3 +39,7 @@
 `$ docker exec -it <container_name> bash`
 #### logout from the container
 `$ exit`
+  
+### Vue.js Building
+`$ cd ${PATH_TO_PACKAGE_JSON_FOLDER}`
+`$ npm run build`
