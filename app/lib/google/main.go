@@ -26,7 +26,7 @@ func GetConnection() *oauth2.Config {
 			AuthURL:  authorizeEndpoint,
 			TokenURL: tokenEndpoint,
 		},
-		RedirectURL: "https://" + os.Getenv("HostName") + ":8080/google/callback",
+		RedirectURL: "https://" + os.Getenv("HostName") + ":8080",
 		Scopes:      []string{"openid", "email", "profile"},
 	}
 	return config
