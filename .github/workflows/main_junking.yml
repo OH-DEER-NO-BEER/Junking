@@ -35,3 +35,5 @@ jobs:
           GIT_REPOSITORY: https://github.com/OH-DEER-NO-BEER/Junking
           GOOGLECLIENTID: ${{ secrets.GOOGLECLIENTID }}
           GOOGLECLIENTSECRET: ${{ secrets.GOOGLECLIENTSECRET }}
+          CERTFILE: ${{ secrets.CERTFILE }}
+          KEYFILE: ${{ secrets.KEYFILE }}
