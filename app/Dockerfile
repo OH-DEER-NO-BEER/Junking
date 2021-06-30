@@ -13,9 +13,13 @@ ARG GOARCH=amd64
 ARG GoogleClientID
 ARG GoogleClientSecret
 ARG HostName
+ARG CertFile
+ARG KeyFile
 ENV GoogleClientID=${GoogleClientID}
 ENV GoogleClientSecret=${GoogleClientSecret}
 ENV HostName=${HostName}
+ENV CertFile=${CertFile}
+ENV KeyFile=${KeyFile}
 
 EXPOSE 8080
 

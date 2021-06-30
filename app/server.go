@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 
 	"Junking/controllers"
 
@@ -53,13 +54,17 @@ func main() {
 		})
 		loginGroup.GET("/ws", controllers.RoomsHub.CheckIn)
 	}
-
 	// go controllers.RoomsHub.Run()
 
-	// err := engine.RunTLS(":8080")
-	err := engine.Run(":8080")
-
-	if err != nil {
-		log.Fatal("Run: ", err)
+	if os.Getenv("HostName") == "localhost" {
+		err := engine.Run(":8080")
+		if err != nil {
+			log.Fatal("Run: ", err)
+		}
+	} else {
+		err := engine.RunTLS(":8080", os.Getenv("CertFile"), os.Getenv("KeyFile"))
+		if err != nil {
+			log.Fatal("Run: ", err)
+		}
 	}
 }
