@@ -28,7 +28,7 @@ jobs:
           SERVER_HOST: ${{ secrets.APP_IP }} # 接続先のGCEの外部IP
       - name: Deploy
         run: |
-          ssh ${DEPLOY_USER}@${SERVER_HOST} -i ~/.ssh/my-ssh-key 'bash -s' < deploy.sh ${GIT_REPOSITORY} ${GOOGLECLIENTID} ${GOOGLECLIENTSECRET} 
+          ssh ${DEPLOY_USER}@${SERVER_HOST} -i ~/.ssh/my-ssh-key 'bash -s' < deploy.sh ${GIT_REPOSITORY} ${GOOGLECLIENTID} ${GOOGLECLIENTSECRET} ${CERTFILE} ${KEYFILE}
         env:
           DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
           SERVER_HOST: ${{ secrets.APP_IP }} # 接続先のGCEの外部IP
