@@ -23,7 +23,7 @@ services:
             - "GOPATH=/go"
         build: 
             context: ./app
-            dockerfile: Dockerfile
+            dockerfile: Dockerfile.localhost_app
             args:
                 - GoogleClientID=test
                 - GoogleClientSecret=test
