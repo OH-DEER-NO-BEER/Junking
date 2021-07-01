@@ -27,6 +27,8 @@ func sampleMiddleware() gin.HandlerFunc {
 }
 
 func main() {
+	protocol := "https"
+
 	// go controllers.InitRoomHub()
 
 	engine := gin.Default()
@@ -50,7 +52,9 @@ func main() {
 		})
 
 		loginGroup.GET("/app", func(c *gin.Context) {
-			c.HTML(http.StatusOK, "index.html", gin.H{})
+			c.HTML(http.StatusOK, "index.html", gin.H{
+				"message": "it's" + protocol,
+			})
 		})
 		loginGroup.GET("/ws", controllers.RoomsHub.CheckIn)
 	}
@@ -63,7 +67,11 @@ func main() {
 	} else {
 		err := engine.RunTLS(":8080", os.Getenv("CertFile"), os.Getenv("KeyFile"))
 		if err != nil {
-			log.Fatal("Run: ", err)
+			protocol = "http"
+			err := engine.Run(":8080")
+			if err != nil {
+				log.Fatal("Run: ", err)
+			}
 		}
 	}
 }
