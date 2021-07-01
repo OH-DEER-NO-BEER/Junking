@@ -65,9 +65,14 @@ func main() {
 			log.Fatal("Run: ", err)
 		}
 	} else {
-		// err := engine.RunTLS(":8080", os.Getenv("CertFile"), os.Getenv("KeyFile"))
-		err := engine.RunTLS(":8080", "./fullchain.pem", "./privkey.pem")
-		if err != nil {
+		_, err_c := os.Stat(os.Getenv("CertFile"))
+		_, err_p := os.Stat(os.Getenv("KeyFile"))
+		if err_c == nil && err_p == nil {
+			err := engine.RunTLS(":8080", os.Getenv("CertFile"), os.Getenv("KeyFile"))
+			if err != nil {
+				log.Fatal("Run: ", err)
+			}
+		} else {
 			protocol = "http"
 			err := engine.Run(":8080")
 			if err != nil {

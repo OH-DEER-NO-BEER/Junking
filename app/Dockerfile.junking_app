@@ -24,7 +24,7 @@ ENV KeyFile=${KeyFile}
 EXPOSE 8080
 
 # RUN go mod tidy
-COPY /etc/letsencrypt/live/junking.tk/ /go/src/Junking/
+# COPY /etc/letsencrypt/live/junking.tk/ /go/src/Junking/
 COPY ./startup.sh /go/src/Junking/startup.sh
 RUN chmod 755 /go/src/Junking/startup.sh
 
