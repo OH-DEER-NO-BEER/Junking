@@ -33,6 +33,7 @@ services:
         tty: true
         volumes:
             - ./app:/go/src/Junking
+            - /etc/letsencrypt/live/junking.tk/:/etc/letsencrypt/live/junking.tk/
         ports: 
             - "8080:8080"
         depends_on: 
