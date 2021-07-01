@@ -1,9 +1,6 @@
 package models
 
 import (
-	"fmt"
-	"log"
-
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
 )
@@ -44,39 +41,39 @@ func AddUserData(name string, address string) {
 	db := dbConnect()
 	defer db.Close()
 
-	insert, err := db.Prepare("INSERT INTO users(name, address) values(?, ?)")
-	if err != nil {
-		panic(err.Error())
-	}
+	// insert, err := db.Prepare("INSERT INTO users(name, address) values(?, ?)")
+	// if err != nil {
+	// 	panic(err.Error())
+	// }
 
-	u := NewUser(name, address)
+	// u := NewUser(name, address)
 
-	_, err = insert.Exec(u.name, u.address)
-	if err != nil {
-		panic(err.Error())
-	}
+	// _, err = insert.Exec(u.name, u.address)
+	// if err != nil {
+	// 	panic(err.Error())
+	// }
 }
 
 func ShowUserData() {
 	db := dbConnect()
 	defer db.Close()
 
-	var u user
-	rows, err := db.Query("SELECT * FROM users")
-	if err != nil {
-		panic(err.Error())
-	}
-	for rows.Next() {
-		err := rows.Scan(&u.id, &u.name, &u.address, &u.rock_num, &u.scissors_num, &u.paper_num, &u.win_rock_num, &u.win_scissors_num, &u.win_paper_num)
-		if err != nil {
-			log.Fatal(err)
-		}
-		fmt.Println(u.id, u.name, u.address, u.rock_num, u.scissors_num, u.paper_num, u.win_rock_num, u.win_scissors_num, u.win_paper_num)
-	}
-	err = rows.Err()
-	if err != nil {
-		log.Fatal(err)
-	}
+	// var u user
+	// rows, err := db.Query("SELECT * FROM users")
+	// if err != nil {
+	// 	panic(err.Error())
+	// }
+	// for rows.Next() {
+	// 	err := rows.Scan(&u.id, &u.name, &u.address, &u.rock_num, &u.scissors_num, &u.paper_num, &u.win_rock_num, &u.win_scissors_num, &u.win_paper_num)
+	// 	if err != nil {
+	// 		log.Fatal(err)
+	// 	}
+	// 	fmt.Println(u.id, u.name, u.address, u.rock_num, u.scissors_num, u.paper_num, u.win_rock_num, u.win_scissors_num, u.win_paper_num)
+	// }
+	// err = rows.Err()
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
 
 }
 

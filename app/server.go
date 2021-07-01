@@ -17,11 +17,11 @@ func sampleMiddleware() gin.HandlerFunc {
 		id, id_err := c.Cookie("ID")
 		email, email_err := c.Cookie(("Email"))
 		fmt.Println("name =", name, "id =", id, ", email =", email, "name_err =", name_err, "id_err =", id_err, ", emai_err =", email_err)
-		// if name_err != nil || id_err != nil || email_err != nil {
-		// 	fmt.Println("No Cookie!")
-		// 	controllers.GetOauth2(c)
-		// 	c.Abort()
-		// }
+		if name_err != nil || id_err != nil || email_err != nil {
+			fmt.Println("No Cookie!")
+			controllers.GetOauth2(c)
+			c.Abort()
+		}
 		c.Next()
 	}
 }
@@ -55,7 +55,6 @@ func main() {
 		loginGroup.GET("/ws", controllers.RoomsHub.CheckIn)
 	}
 	// go controllers.RoomsHub.Run()
-
 	if os.Getenv("HostName") == "localhost" {
 		err := engine.Run(":8080")
 		if err != nil {
