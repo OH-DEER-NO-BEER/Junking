@@ -1,11 +1,8 @@
 package models
 
 import (
-	"database/sql"
-	"fmt"
-	"log"
-
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/jinzhu/gorm"
 )
 
 type user struct {
@@ -20,55 +17,63 @@ type user struct {
 	win_paper_num    int
 }
 
+func dbConnect() *gorm.DB {
+	DBMS := "mysql"
+	USER := "root"
+	PASS := "test"
+	PROTOCOL := "tcp(db:3306)"
+	DBNAME := "Junking"
+
+	CONNECT := USER + ":" + PASS + "@" + PROTOCOL + "/" + DBNAME
+	db, err := gorm.Open(DBMS, CONNECT)
+
+	if err != nil {
+		panic(err.Error())
+	}
+	return db
+}
+
 func NewUser(name string, address string) *user {
 	return &user{0, name, address, 0, 0, 0, 0, 0, 0}
 }
 
 func AddUserData(name string, address string) {
-	db, err := sql.Open("mysql",
-		"root:test@tcp(db:3306)/Junking") //DB_HOST : db
-	if err != nil {
-		log.Fatal(err)
-	}
+	db := dbConnect()
 	defer db.Close()
 
-	insert, err := db.Prepare("INSERT INTO users(name, address) values(?, ?)")
-	if err != nil {
-		panic(err.Error())
-	}
+	// insert, err := db.Prepare("INSERT INTO users(name, address) values(?, ?)")
+	// if err != nil {
+	// 	panic(err.Error())
+	// }
 
-	u := NewUser(name, address)
+	// u := NewUser(name, address)
 
-	_, err = insert.Exec(u.name, u.address)
-	if err != nil {
-		panic(err.Error())
-	}
+	// _, err = insert.Exec(u.name, u.address)
+	// if err != nil {
+	// 	panic(err.Error())
+	// }
 }
 
 func ShowUserData() {
-	db, err := sql.Open("mysql",
-		"root:test@tcp(db:3306)/Junking") //DB_HOST : db
-	if err != nil {
-		log.Fatal(err)
-	}
+	db := dbConnect()
 	defer db.Close()
 
-	var u user
-	rows, err := db.Query("SELECT * FROM users")
-	if err != nil {
-		panic(err.Error())
-	}
-	for rows.Next() {
-		err := rows.Scan(&u.id, &u.name, &u.address, &u.rock_num, &u.scissors_num, &u.paper_num, &u.win_rock_num, &u.win_scissors_num, &u.win_paper_num)
-		if err != nil {
-			log.Fatal(err)
-		}
-		fmt.Println(u.id, u.name, u.address, u.rock_num, u.scissors_num, u.paper_num, u.win_rock_num, u.win_scissors_num, u.win_paper_num)
-	}
-	err = rows.Err()
-	if err != nil {
-		log.Fatal(err)
-	}
+	// var u user
+	// rows, err := db.Query("SELECT * FROM users")
+	// if err != nil {
+	// 	panic(err.Error())
+	// }
+	// for rows.Next() {
+	// 	err := rows.Scan(&u.id, &u.name, &u.address, &u.rock_num, &u.scissors_num, &u.paper_num, &u.win_rock_num, &u.win_scissors_num, &u.win_paper_num)
+	// 	if err != nil {
+	// 		log.Fatal(err)
+	// 	}
+	// 	fmt.Println(u.id, u.name, u.address, u.rock_num, u.scissors_num, u.paper_num, u.win_rock_num, u.win_scissors_num, u.win_paper_num)
+	// }
+	// err = rows.Err()
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
 
 }
 
