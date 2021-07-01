@@ -1,11 +1,11 @@
 package models
 
 import (
-	"database/sql"
 	"fmt"
 	"log"
 
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/jinzhu/gorm"
 )
 
 type user struct {
@@ -20,16 +20,28 @@ type user struct {
 	win_paper_num    int
 }
 
+func dbConnect() *gorm.DB {
+	DBMS := "mysql"
+	USER := "root"
+	PASS := "test"
+	PROTOCOL := "tcp(db:3306)"
+	DBNAME := "Junking"
+
+	CONNECT := USER + ":" + PASS + "@" + PROTOCOL + "/" + DBNAME
+	db, err := gorm.Open(DBMS, CONNECT)
+
+	if err != nil {
+		panic(err.Error())
+	}
+	return db
+}
+
 func NewUser(name string, address string) *user {
 	return &user{0, name, address, 0, 0, 0, 0, 0, 0}
 }
 
 func AddUserData(name string, address string) {
-	db, err := sql.Open("mysql",
-		"root:test@tcp(db:3306)/Junking") //DB_HOST : db
-	if err != nil {
-		log.Fatal(err)
-	}
+	db := dbConnect()
 	defer db.Close()
 
 	insert, err := db.Prepare("INSERT INTO users(name, address) values(?, ?)")
@@ -46,11 +58,7 @@ func AddUserData(name string, address string) {
 }
 
 func ShowUserData() {
-	db, err := sql.Open("mysql",
-		"root:test@tcp(db:3306)/Junking") //DB_HOST : db
-	if err != nil {
-		log.Fatal(err)
-	}
+	db := dbConnect()
 	defer db.Close()
 
 	var u user
