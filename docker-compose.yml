@@ -28,6 +28,8 @@ services:
                 - GoogleClientID=test
                 - GoogleClientSecret=test
                 - HostName=junking.tk
+                - CertFile=test
+                - KeyFile=test
         tty: true
         volumes:
             - ./app:/go/src/Junking
