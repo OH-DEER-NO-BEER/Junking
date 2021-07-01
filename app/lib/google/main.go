@@ -12,11 +12,11 @@ const (
 )
 
 func GetConnection() *oauth2.Config {
-	var protocol string
+	var redirectUri string
 	if os.Getenv("HostName") == "localhost" {
-		protocol = "http://"
+		redirectUri = "http://localhost:8080/google/callback"
 	} else {
-		protocol = "https://"
+		redirectUri = "https://" + os.Getenv("HostName") + "/google/callback"
 	}
 
 	config := &oauth2.Config{
@@ -26,7 +26,7 @@ func GetConnection() *oauth2.Config {
 			AuthURL:  authorizeEndpoint,
 			TokenURL: tokenEndpoint,
 		},
-		RedirectURL: protocol + os.Getenv("HostName") + ":8080/google/callback",
+		RedirectURL: redirectUri,
 		Scopes:      []string{"openid", "email", "profile"},
 	}
 	return config
