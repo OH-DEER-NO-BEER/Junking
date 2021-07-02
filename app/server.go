@@ -67,17 +67,21 @@ func main() {
 	} else {
 		_, err_c := os.Stat(os.Getenv("CertFile"))
 		_, err_p := os.Stat(os.Getenv("KeyFile"))
+		fmt.Println("Path to CertFile:" + os.Getenv("CertFile"))
+		fmt.Println("Path to KeyFile:" + os.Getenv("KeyFile"))
 		if err_c == nil && err_p == nil {
 			err := engine.RunTLS(":8080", os.Getenv("CertFile"), os.Getenv("KeyFile"))
 			if err != nil {
 				log.Fatal("Run: ", err)
 			}
+			fmt.Println("Success!")
 		} else {
 			protocol = "http"
 			err := engine.Run(":8080")
 			if err != nil {
 				log.Fatal("Run: ", err)
 			}
+			fmt.Println("Failed to set up HTTPS...")
 		}
 	}
 }
